@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="KK/Altair">
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Instructions - K65</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Instructions";
+    var mkdocs_page_input_path = "instructions.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> K65</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../syntax/">Syntax</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Instructions</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#standard-6502-opcodes">Standard 6502 opcodes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#adc-add-with-carry">ADC add with carry</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#and-and-with-accumulator">AND and (with accumulator)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#asl-arithmetic-shift-left">ASL arithmetic shift left</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bcc-branch-on-carry-clear">BCC branch on carry clear</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bcs-branch-on-carry-clear">BCS branch on carry clear</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#beq-branch-on-equal-zero-set">BEQ branch on equal (zero set)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bit-bit-test">BIT bit test</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bmi-branch-on-minus-negative-set">BMI branch on minus (negative set)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bne-branch-on-not-equal-zero-clear">BNE branch on not equal (zero clear)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bpl-branch-on-plus-negative-clear">BPL branch on plus (negative clear)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#brk-interrupt">BRK interrupt</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bvc-branch-on-overflow-clear">BVC branch on overflow clear</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bvs-branch-on-overflow-set">BVS branch on overflow set</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#clc-clear-carry">CLC clear carry</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cld-clear-decimal">CLD clear decimal</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cli-clear-interrupt-disable">CLI clear interrupt disable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#clv-clear-overflow">CLV clear overflow</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cmp-compare-with-accumulator">CMP compare (with accumulator)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cpx-compare-with-x">CPX compare with X</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cpy-compare-with-y">CPY compare with Y</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dec-decrement">DEC decrement</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dex-decrement-x">DEX decrement X</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dey-decrement-y">DEY decrement Y</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#eor-exclusive-or-with-accumulator">EOR exclusive or (with accumulator)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#inc-increment">INC increment</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#inx-increment-x">INX increment X</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#iny-increment-x">INY increment X</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jmp-jump">JMP jump</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jsr-jump-subroutine">JSR jump subroutine</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lda-load-accumulator">LDA load accumulator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ldx-load-x">LDX load X</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ldy-load-y">LDY load Y</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lsr-logical-shift-right">LSR logical shift right</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#nop-no-operation">NOP no operation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ora-or-with-accumulator">ORA or with accumulator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pha-push-accumulator">PHA push accumulator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#php-push-processor-status-sr">PHP push processor status (SR)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pla-pull-accumulator">PLA pull accumulator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#plp-pull-processor-status-sr">PLP pull processor status (SR)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rol-rotate-left">ROL rotate left</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ror-rotate-right">ROR rotate right</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rti-return-from-interrupt">RTI return from interrupt</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rts-return-from-subroutine">RTS return from subroutine</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sbc-subtract-with-carry">SBC subtract with carry</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sec-set-carry">SEC set carry</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sed-set-decimal">SED set decimal</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sei-set-interrupt-disable">SEI set interrupt disable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sta-store-accumulator">STA store accumulator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#stx-store-x">STX store X</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sty-store-y">STY store Y</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tax-transfer-accumulator-to-x">TAX transfer accumulator to X</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tay-transfer-accumulator-to-y">TAY transfer accumulator to Y</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tsx-transfer-stack-pointer-to-x">TSX transfer stack pointer to X</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#txa-transfer-x-to-accumulator">TXA transfer X to accumulator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#txs-transfer-x-to-stack-pointer">TXS transfer X to stack pointer</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tya-transfer-y-to-accumulator">TYA transfer Y to accumulator</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../evaluator/">Evaluator</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../examples/">Examples</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../projects/">Projects</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../known-bugs/">Known Bugs</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../todo/">To Do</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">K65</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Instructions</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/Krzysiek-K/k65/edit/master/docs/instructions.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1"></h1>
+<p><strong>K65</strong> compiler supports following 6502 instructions. <strong>TBD</strong> value means that instruction support is planned, but currently not implemented.</p>
+<h2 id="standard-6502-opcodes">Standard 6502 opcodes</h2>
+<h3 id="adc-add-with-carry"><code>ADC</code> add with carry</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>a+imm</code></td>
+<td align="center"><code>a+mem</code></td>
+<td align="center"><code>a+mem,x</code></td>
+<td align="center"><code>a+mem,y</code></td>
+<td align="center"><code>a+(mem,x)</code></td>
+<td align="center"><code>a+(mem),y</code></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="and-and-with-accumulator"><code>AND</code> and (with accumulator)</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>a&amp;imm</code></td>
+<td align="center"><code>a&amp;mem</code></td>
+<td align="center"><code>a&amp;mem,x</code></td>
+<td align="center"><code>a&amp;mem,y</code></td>
+<td align="center"><code>a&amp;(mem,x)</code></td>
+<td align="center"><code>a&amp;(mem),y</code></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="asl-arithmetic-shift-left"><code>ASL</code> arithmetic shift left</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>a&lt;&lt;</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>mem&lt;&lt;</code></td>
+<td align="center"><code>mem,x&lt;&lt;</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="bcc-branch-on-carry-clear"><code>BCC</code> branch on carry clear</h3>
+<ul>
+<li><code>&gt;={ ... }</code></li>
+<li><code>&lt; goto label</code></li>
+<li><code>{ ... } &lt;</code></li>
+<li><code>c+{ ... }</code></li>
+<li><code>c- goto label</code></li>
+<li><code>{ ... } c-</code></li>
+</ul>
+<h3 id="bcs-branch-on-carry-clear"><code>BCS</code> branch on carry clear</h3>
+<ul>
+<li><code>&lt;{ ... }</code></li>
+<li><code>&gt;= goto label</code></li>
+<li><code>{ ... } &gt;=</code></li>
+<li><code>c-{ ... }</code></li>
+<li><code>c+ goto label</code></li>
+<li><code>{ ... } c+</code></li>
+</ul>
+<h3 id="beq-branch-on-equal-zero-set"><code>BEQ</code> branch on equal (zero set)</h3>
+<ul>
+<li><code>{ ... }</code></li>
+<li><code>== goto label</code></li>
+<li><code>{ ... } ==</code></li>
+</ul>
+<h3 id="bit-bit-test"><code>BIT</code> bit test</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>a&amp;?mem</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="bmi-branch-on-minus-negative-set"><code>BMI</code> branch on minus (negative set)</h3>
+<ul>
+<li><code>&gt;=0{ ... }</code></li>
+<li><code>&lt;0 goto label</code></li>
+<li><code>{ ... } &lt;0</code></li>
+</ul>
+<h3 id="bne-branch-on-not-equal-zero-clear"><code>BNE</code> branch on not equal (zero clear)</h3>
+<ul>
+<li><code>=={ ... }</code></li>
+<li><code>!= goto label</code></li>
+<li><code>{ ... } !=</code></li>
+</ul>
+<h3 id="bpl-branch-on-plus-negative-clear"><code>BPL</code> branch on plus (negative clear)</h3>
+<ul>
+<li><code>&lt;0{ ... }</code></li>
+<li><code>&gt;=0 goto label</code></li>
+<li><code>{ ... } &gt;=0</code></li>
+</ul>
+<h3 id="brk-interrupt"><code>BRK</code> interrupt</h3>
+<p>/* TBD */</p>
+<h3 id="bvc-branch-on-overflow-clear"><code>BVC</code> branch on overflow clear</h3>
+<ul>
+<li><code>&lt;&lt;={ ... }</code></li>
+<li><code>&gt;&gt;= goto label</code></li>
+<li><code>{ ... } &gt;&gt;=</code></li>
+<li><code>o+{ ... }</code></li>
+<li><code>o- goto label</code></li>
+<li><code>{ ... } o-</code></li>
+</ul>
+<h3 id="bvs-branch-on-overflow-set"><code>BVS</code> branch on overflow set</h3>
+<ul>
+<li><code>&gt;&gt;={ ... }</code></li>
+<li><code>&lt;&lt;= goto label</code></li>
+<li><code>{ ... } &lt;&lt;=</code></li>
+<li><code>o-{ ... }</code></li>
+<li><code>o+ goto label</code></li>
+<li><code>{ ... } o+</code></li>
+</ul>
+<h3 id="clc-clear-carry"><code>CLC</code> clear carry</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>c-</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="cld-clear-decimal"><code>CLD</code> clear decimal</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>d-</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="cli-clear-interrupt-disable"><code>CLI</code> clear interrupt disable</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>i-</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="clv-clear-overflow"><code>CLV</code> clear overflow</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>o-</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="cmp-compare-with-accumulator"><code>CMP</code> compare (with accumulator)</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>a?imm</code></td>
+<td align="center"><code>a?mem</code></td>
+<td align="center"><code>a?mem,x</code></td>
+<td align="center"><code>a?mem,y</code></td>
+<td align="center"><code>a?(mem,x)</code></td>
+<td align="center"><code>a?(mem),y</code></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="cpx-compare-with-x"><code>CPX</code> compare with X</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>x?imm</code></td>
+<td align="center"><code>x?mem</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="cpy-compare-with-y"><code>CPY</code> compare with Y</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>y?imm</code></td>
+<td align="center"><code>y?mem</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="dec-decrement"><code>DEC</code> decrement</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>mem--</code></td>
+<td align="center"><code>mem,x--</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="dex-decrement-x"><code>DEX</code> decrement X</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>x--</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="dey-decrement-y"><code>DEY</code> decrement Y</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>y--</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="eor-exclusive-or-with-accumulator"><code>EOR</code> exclusive or (with accumulator)</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>a^imm</code></td>
+<td align="center"><code>a^mem</code></td>
+<td align="center"><code>a^mem,x</code></td>
+<td align="center"><code>a^mem,y</code></td>
+<td align="center"><code>a^(mem,x)</code></td>
+<td align="center"><code>a^(mem),y</code></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="inc-increment"><code>INC</code> increment</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>mem++</code></td>
+<td align="center"><code>mem,x++</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="inx-increment-x"><code>INX</code> increment X</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>x++</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="iny-increment-x"><code>INY</code> increment X</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>y++</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="jmp-jump"><code>JMP</code> jump</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>goto mem</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>goto (mem)</code></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="jsr-jump-subroutine"><code>JSR</code> jump subroutine</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>call mem</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="lda-load-accumulator"><code>LDA</code> load accumulator</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>a=imm</code></td>
+<td align="center"><code>a=mem</code></td>
+<td align="center"><code>a=mem,x</code></td>
+<td align="center"><code>a=mem,y</code></td>
+<td align="center"><code>a=(mem,x)</code></td>
+<td align="center"><code>a=(mem),y</code></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="ldx-load-x"><code>LDX</code> load X</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>x=imm</code></td>
+<td align="center"><code>x=mem</code></td>
+<td align="center"></td>
+<td align="center"><code>x=mem,y</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="ldy-load-y"><code>LDY</code> load Y</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>y=imm</code></td>
+<td align="center"><code>y=mem</code></td>
+<td align="center"><code>y=mem,x</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="lsr-logical-shift-right"><code>LSR</code> logical shift right</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>a&gt;&gt;</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>mem&gt;&gt;</code></td>
+<td align="center"><code>mem,x&gt;&gt;</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="nop-no-operation"><code>NOP</code> no operation</h3>
+<ul>
+<li><code>*</code> (for single NOP)</li>
+<li><code>*&lt;number&gt;</code> to wait <code>&lt;number&gt;</code> of cycles</li>
+</ul>
+<h3 id="ora-or-with-accumulator"><code>ORA</code> or with accumulator</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>imm</code></td>
+<td align="center"><code>mem</code></td>
+<td align="center"><code>mem,x</code></td>
+<td align="center"><code>mem,y</code></td>
+<td align="center"><code>(mem,x)</code></td>
+<td align="center"><code>(mem),y</code></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="pha-push-accumulator"><code>PHA</code> push accumulator</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>a!!</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="php-push-processor-status-sr"><code>PHP</code> push processor status (SR)</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>flag!!</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="pla-pull-accumulator"><code>PLA</code> pull accumulator</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>a??</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="plp-pull-processor-status-sr"><code>PLP</code> pull processor status (SR)</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>flag??</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="rol-rotate-left"><code>ROL</code> rotate left</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>a&lt;&lt;&lt;</code></td>
+<td align="center"></td>
+<td align="center"><code>mem&lt;&lt;&lt;</code></td>
+<td align="center"><code>mem,x&lt;&lt;&lt;</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="ror-rotate-right"><code>ROR</code> rotate right</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>a&gt;&gt;&gt;</code></td>
+<td align="center"></td>
+<td align="center"><code>mem&gt;&gt;&gt;</code></td>
+<td align="center"><code>mem,x&gt;&gt;&gt;</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="rti-return-from-interrupt"><code>RTI</code> return from interrupt</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>return_i</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="rts-return-from-subroutine"><code>RTS</code> return from subroutine</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>return</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="sbc-subtract-with-carry"><code>SBC</code> subtract with carry</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>a-imm</code></td>
+<td align="center"><code>a-mem</code></td>
+<td align="center"><code>a-mem,x</code></td>
+<td align="center"><code>a-mem,y</code></td>
+<td align="center"><code>a-(mem,x)</code></td>
+<td align="center"><code>a-(mem),y</code></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="sec-set-carry"><code>SEC</code> set carry</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>c+</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="sed-set-decimal"><code>SED</code> set decimal</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>d+</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="sei-set-interrupt-disable"><code>SEI</code> set interrupt disable</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>i+</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="sta-store-accumulator"><code>STA</code> store accumulator</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>mem=a</code></td>
+<td align="center"><code>mem,x=a</code></td>
+<td align="center"><code>mem,y=a</code></td>
+<td align="center"><code>(mem,x)=a</code></td>
+<td align="center"><code>(mem),y=a</code></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="stx-store-x"><code>STX</code> store X</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>mem=x</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="sty-store-y"><code>STY</code> store Y</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><code>mem=y</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="tax-transfer-accumulator-to-x"><code>TAX</code> transfer accumulator to X</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>x-a</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="tay-transfer-accumulator-to-y"><code>TAY</code> transfer accumulator to Y</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>y=a</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="tsx-transfer-stack-pointer-to-x"><code>TSX</code> transfer stack pointer to X</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>x=s</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="txa-transfer-x-to-accumulator"><code>TXA</code> transfer X to accumulator</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>a=x</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="txs-transfer-x-to-stack-pointer"><code>TXS</code> transfer X to stack pointer</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>s=x</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="tya-transfer-y-to-accumulator"><code>TYA</code> transfer Y to accumulator</h3>
+<table>
+<thead>
+<tr>
+<th align="center">Acc</th>
+<th align="center">Implied</th>
+<th align="center">Imm</th>
+<th align="center">Mem</th>
+<th align="center">Mem,X</th>
+<th align="center">Mem,Y</th>
+<th align="center">(Mem,X)</th>
+<th align="center">(Mem),Y</th>
+<th align="center">(Mem)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="center"><code>a=y</code></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../evaluator/" class="btn btn-neutral float-right" title="Evaluator">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../syntax/" class="btn btn-neutral" title="Syntax"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/Krzysiek-K/k65/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../syntax/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../evaluator/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="KK/Altair">
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Syntax - K65</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Syntax";
+    var mkdocs_page_input_path = "syntax.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> K65</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Syntax</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#comments">Comments</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#variable-declaration">Variable declaration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#constant-declaration">Constant declaration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bank-selection">Bank selection</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#data-block-definition">Data block definition</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#compile-time-evaluator">Compile-time Evaluator</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#code-sections">Code sections</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#main">main</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#func">func</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#naked">naked</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#inline">inline</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#far-calls">Far calls</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../instructions/">Instructions</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../evaluator/">Evaluator</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../examples/">Examples</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../projects/">Projects</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../known-bugs/">Known Bugs</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../todo/">To Do</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">K65</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Syntax</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/Krzysiek-K/k65/edit/master/docs/syntax.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1"></h1>
+<h2 id="comments">Comments</h2>
+<p><strong>K65</strong>  uses <strong>C</strong>-like comments.</p>
+<pre><code class="language-c">// this is a line comment
+
+/* this is a
+   block comment */
+</code></pre>
+<h2 id="variable-declaration">Variable declaration</h2>
+<p>Variables in <strong>K65</strong> are names given to chosen memory addresses.
+Examples of variable declaration:</p>
+<pre><code class="language-c">var foo=0x80          // declares 'foo' at address 0x80
+var foo2              // declares 'foo2' at address 0x81 (next after previous var)
+var foo3, foo4        // multiple declarations per line allowed
+var bar[10], bar2[10] // [] specifies variable size in bytes (address increment for next var)
+var bar3 ?            // adding '?' at the end of var declaration makes compiler print var addresses
+</code></pre>
+<h2 id="constant-declaration">Constant declaration</h2>
+<p>The best way of defining constants is using the <strong>evaluator</strong>. Constants defined this way can be changed at any moment during compilation. Constants can be any value of floating point type. When used within <strong>6502</strong> instruction, they are converted to single byte by rounding to nearest integer and <code>AND</code>-ing with <code>0xFF</code> (this way negative values are represented in U2 form).</p>
+<p>Examples:</p>
+<pre><code class="language-c">[                       // square brace starts evaluator expression
+  MY_CONSTANT = 5,      // define constants
+  SOME_NUMBER = 0x13
+]                       // end of evaluator expression
+</code></pre>
+<h2 id="bank-selection">Bank selection</h2>
+<p>While default bank can be chosen in file list for each file, a file can span across multiple banks. Active bank can be changed at any point in the file.</p>
+<p>Example:</p>
+<pre><code class="language-c">bank my_bank            // from now on all code and data will go to 'my_bank'
+</code></pre>
+<h2 id="data-block-definition">Data block definition</h2>
+<p>Data blocks are defined using data keyword. Defining data block at the same time defines a label to its first element, so the block is accessibl using simple indexing, like <code>MyData,x</code>. Datablocks can have optional <code>alignment</code> or <code>no-page-crossing</code> restrictions enabled.</p>
+<p>Examples:</p>
+<pre><code class="language-c">data MyData {
+  align 16              // align to 16 byte boundary
+  1 2 3 4 5 6 7 8       // data bytes folow
+}
+
+data MyData2 {
+  align 256 + 8         // align to 8 bytes after page boundary (lower address byte will be 0x08)
+  1 2 3 4 5 6 7 8       // data bytes folow
+}
+
+data MyData3 {
+  nocross               // the data will fit completely inside single page, but can be at any offset within it
+  1 2 3 4 5 6 7 8       // data bytes folow
+}
+</code></pre>
+<h2 id="compile-time-evaluator">Compile-time Evaluator</h2>
+<p>The <strong>K65</strong> compiler has embedded evaluator that always executes at compile-time. The evaluator can perform arbitrary math operations which results are inlined in the final code as immediates. The evaluator can also set and use global compiler constants.</p>
+<p>The evaluator is explained in detail on <a href="../evaluator">K65 Evaluator</a> page.</p>
+<h2 id="code-sections">Code sections</h2>
+<p>Executable code in K65 compiler is specified in sections. There currently supported types of code sections are:</p>
+<h3 id="main"><code>main</code></h3>
+<p>This function being program entry point.</p>
+<pre><code class="language-c">main {
+  a=0        // set accumulator to 0
+  {} always  // loop forever
+}
+</code></pre>
+<h3 id="func"><code>func</code></h3>
+<p>User defined function, that can be called from the code.</p>
+<pre><code class="language-c">func inc_x {
+  x++        // increments X register and returns
+}            // RTS is added automatically
+</code></pre>
+<h3 id="naked"><code>naked</code></h3>
+<p>Just like <code>func</code>, but no <code>RTS</code> is added automatically at the end.</p>
+<pre><code class="language-c">naked inc_x_twice {
+  x++        // increments X register
+  goto inc_x // jump to previously defined inc_x (saves stack)
+}            // no RTS here; make sure function never reaches here
+</code></pre>
+<h3 id="inline"><code>inline</code></h3>
+<p>User defined <code>macro</code> that is <em>inlined</em> in the code when used.</p>
+<pre><code class="language-c">inline inc_y {
+  y++
+}
+</code></pre>
+<p>Functions and inlines are used simply by specifying their names, which places <code>JSR</code> opcode or inlines the code. Function and inline calls do not pass any parameters. Any potential parameter and return value handling must be handled explicitly by the programmer using either registers, stack or predetermined memory locations.</p>
+<pre><code class="language-c">func test {
+  inc_x      // this will use JSR instruction to call 'inc_x' defined earlier
+  inc_y      // this will inline the 'inc_y' inline - note that it will not add any overhead compared to simple 'y++'
+}
+</code></pre>
+<h2 id="far-calls">Far calls</h2>
+<p>Functions can also be called with far prefix to mark that the target function is in another bank, than the current one. The bankswitching mechanism used is defined by the linker. Inlines do not use far prefix, because the code is simply inlined.</p>
+<p><strong>NOTE</strong>: if far call is used within inline make sure to use such inline with care - inlining such inline in another bank will copy the inline code directly, which will usually result in improper bankswitching and program crash.</p>
+<pre><code class="language-c">func test2_in_different_bank {
+  far inc_x
+}
+</code></pre>
+<hr />
+<p><em>This page is still under construction - much of the infrmation is still to be filled</em></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../instructions/" class="btn btn-neutral float-right" title="Instructions">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/Krzysiek-K/k65/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../instructions/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

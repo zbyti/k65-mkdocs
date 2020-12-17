@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="KK/Altair">
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Examples - K65</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Examples";
+    var mkdocs_page_input_path = "examples.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> K65</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../syntax/">Syntax</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../instructions/">Instructions</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../evaluator/">Evaluator</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Examples</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#atari-800-xl">Atari 800 XL</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#rainbow">Rainbow</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#starfield">Starfield</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dli-example">DLI example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#flamesfire">Flames/Fire</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mode-910">Mode 9++/10++</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#quatari-landcape">Quatari landcape</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#screensaver">Screensaver</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../projects/">Projects</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../known-bugs/">Known Bugs</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../todo/">To Do</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">K65</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Examples</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/Krzysiek-K/k65/edit/master/docs/examples.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1"></h1>
+<h2 id="atari-800-xl">Atari 800 XL</h2>
+<h3 id="rainbow">Rainbow</h3>
+<pre><code class="language-c">main {
+  {
+    COLPF2=a=VCOUNT
+    WSYNC=a
+  } always
+}
+</code></pre>
+<h3 id="starfield">Starfield</h3>
+<pre><code class="language-c">var PCOLR0 = 0x02C0
+
+data stars {
+  align 256
+  for x=0..255 eval [ rnd() &amp; 255 ]
+}
+
+data speed {
+  align 256
+  for x=0..255 eval [ (rnd() &amp; 3) + 1 ]
+}
+
+main {
+  PCOLR0=a=14 GRAFM=a
+  {
+    a=0 { a?VCOUNT } !=
+    x=0 {
+      WSYNC=a
+      HPOSM0=a=stars,x
+      a=stars,x a+speed,x stars,x=a
+      x++
+    } !=
+  } always
+}
+</code></pre>
+<h3 id="dli-example">DLI example</h3>
+<pre><code class="language-c">var VDSLST = 0x0200
+var SDLST  = 0x0230
+
+var screen = 0x8000
+
+data displist {
+  nocross
+  0x70 0x70 0x70
+  0x42 &amp;&lt;screen &amp;&gt;screen
+  2 2 2
+  0xF0
+  2 2 2 2
+  0x41 &amp;&lt;displist &amp;&gt;displist
+}
+
+naked dli {
+  a!!
+  COLPF2=a=0xDE WSYNC=a
+  a??
+  return_i
+}
+
+main {
+  SDLST=a=&amp;&lt;displist SDLST+1=a=&amp;&gt;displist
+  VDSLST=a=&amp;&lt;dli VDSLST+1=a=&amp;&gt;dli
+  NMIEN=a=0xC0
+  {} always
+}
+
+</code></pre>
+<h3 id="flamesfire">Flames/Fire</h3>
+<pre><code class="language-c">//------------------------------------------------------------------------------
+// Flame by koalka/bbsl/karzelki
+//------------------------------------------------------------------------------
+
+var RTCLOK = 0x0014
+var SDLSTL = 0x0230
+var SDLSTH = 0x0231
+var SDMCTL = 0x022F
+var GPRIOR = 0x026F
+var COLOR4 = 0x02C8
+var CHBAS  = 0x02F4
+
+var fonts  = 0x6000
+var screen = 0x6400
+
+data dl {
+  nocross
+  0x42  &amp;&lt;screen &amp;&gt;screen
+  for x=0..19 eval [2]
+  0x41  &amp;&lt;dl &amp;&gt;dl
+}
+
+inline pause {
+  a=RTCLOK { a?RTCLOK } ==
+}
+
+main {
+  COLOR4=a=0x20 CHBAS=a=&amp;&gt;fonts
+  SDLSTL=a=&amp;&lt;dl SDLSTH=a=&amp;&gt;dl
+  GPRIOR=a=0x40 SDMCTL=a=0x21
+
+  a=0 x=a y=a
+
+  {
+    screen,x=a
+    screen+0x100,x=a
+    screen+0x200,x=a
+    screen+0x300,x=a
+    x++
+  } !=
+
+  {
+    { fonts,x=a x++ y++ y?8 } !=
+    y=0 c- a+0x11
+  } &lt;
+
+  {
+    {
+      a=screen-1,y c-
+      a+screen,y a+screen+1,y a+screen+32,y a&gt;&gt; a&gt;&gt;
+      screen-31,y=a
+
+      a=screen+0xFF,y c-
+      a+screen+0x100,y a+screen+0x101,y a+screen+0x120,y a&gt;&gt; a&gt;&gt;
+      screen+0xE1,y=a
+
+      a=screen+0x1FF,y c-
+      a+screen+0x200,y a+screen+0x201,y a+screen+0x220,y a&gt;&gt; a&gt;&gt;
+      screen+0x1E1,y=a
+
+      y++
+    } !=
+
+    COLBK=a=10 pause
+
+    x=0x1F {
+      a=RANDOM a&amp;15 screen+0x2E0,x=a
+      x--
+    } &gt;=0
+
+  } always
+}
+</code></pre>
+<h3 id="mode-910">Mode 9++/10++</h3>
+<pre><code class="language-c">// Mode 9++  GPRIOR=a=0x40
+// Mode 10++ GPRIOR=a=0x81
+
+var VDSLST=0x0200, SDLSTL=0x0230, SDMCTL=0x022F, GPRIOR=0x026F
+
+var screen = 0xF000
+
+data dl {
+  nocross
+  0x90 0x6F &amp;&lt;screen &amp;&gt;screen
+  for x=1..58 eval [ x&amp;1 ? 0x8F : 0x2F ]
+  0x41 &amp;&lt;dl &amp;&gt;dl
+}
+
+naked dli {
+  a!!
+  WSYNC=a VSCROL=a=13 VSCROL=a=3
+  a??
+  return_i
+}
+
+main {
+  VDSLST=a=&amp;&lt;dli VDSLST+1=a=&amp;&gt;dli
+  SDLSTL=a=&amp;&lt;dl SDLSTL+1=a=&amp;&gt;dl
+  SDMCTL=a=0x22 GPRIOR=a=0x40 NMIEN=a=0xC0
+  {} always
+}
+</code></pre>
+<h3 id="quatari-landcape">Quatari landcape</h3>
+<pre><code class="language-c">//------------------------------------------------------------------------------
+// This is a part of Quatari 256B intro
+// https://demozoo.org/productions/280623
+//------------------------------------------------------------------------------
+
+var CURSOR_Y = 0x54
+var CURSOR_X = 0x55
+var PREV_Y   = 0x5A
+var PREV_X   = 0x5B
+
+var iter     = 0x80
+
+var COLOR4   = 0x02C8
+var COLOR    = 0x02FB
+var RND      = 0xD20A
+var openmode = 0xEF9C
+var drawto   = 0xF9C2
+
+data colorHeight {
+  170 150 144 144 122 122 110 110 94 94 86 86 82 80
+}
+
+main {
+  a=9 call openmode
+  COLOR4=a=0xB0
+
+  iter=a=79 {
+    CURSOR_X=a=iter PREV_X=a
+    PREV_Y=a=1 COLOR=a=13
+    {
+      x=COLOR
+      CURSOR_Y=a=colorHeight,x
+      a=RND &lt;0 { colorHeight,x++ }
+      a=RND &lt;0 { colorHeight,x-- }
+      call drawto
+      COLOR--
+    } &gt;=0
+    iter--
+  } !=
+
+  {} always
+}
+</code></pre>
+<h3 id="screensaver">Screensaver</h3>
+<pre><code class="language-c">var LNFLG = 0, RTCLOK = 0x14, tmp = 0x80
+
+main {
+  a=0x3f tmp=a
+  a=0xff x=0xf { HPOSP0,x=a x-- } &gt;=0
+
+  {
+.start:
+    WSYNC=a
+    a=LNFLG LNFLG++
+    a^0x20 HPOSP0=a a^tmp HPOSP1=a
+    a=VCOUNT COLPM0=a a^0xff COLPM1=a
+    a=VCOUNT a?0x40 &lt; goto .jump
+    LNFLG-- LNFLG--
+.jump:
+    a=VCOUNT != goto .start
+    a=RTCLOK LNFLG=a a&amp;0x7f != goto .start
+    tmp++
+  } always
+}
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../projects/" class="btn btn-neutral float-right" title="Projects">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../evaluator/" class="btn btn-neutral" title="Evaluator"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/Krzysiek-K/k65/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../evaluator/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../projects/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

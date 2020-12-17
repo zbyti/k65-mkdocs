@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="KK/Altair">
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Evaluator - K65</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Evaluator";
+    var mkdocs_page_input_path = "evaluator.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> K65</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../syntax/">Syntax</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../instructions/">Instructions</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Evaluator</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#operators">Operators</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#acos-x">acos( x )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#addbyte-sec-b">addbyte( sec, b )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#asin-x">asin( x )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ceil-x">ceil( x )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#clamp-x-min-max">clamp( x, min, max )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#color-r-g-b">color( r, g, b )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#color-x">color( x )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cos-x">cos( x )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#error-err">error( err )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#floor-x">floor( x )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#frac-x">frac( x )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#index-tab-x">index( tab, x )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#index-tab-x-y">index( tab, x, y )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#max-a-b">max( a, b )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#min-a-b">min( a, b )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pow-x-y">pow( x, y )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#print-msg">print( msg )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rnd">rnd( )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#round-x">round( x )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sin-x">sin( x )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#size-sec">size( sec )</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sqrt-x">sqrt( x )</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../examples/">Examples</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../projects/">Projects</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../known-bugs/">Known Bugs</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../todo/">To Do</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">K65</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Evaluator</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/Krzysiek-K/k65/edit/master/docs/evaluator.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1"></h1>
+<p>Evaluator in <strong>K65</strong> is compile-time executed expression language very similar to <strong>C/C++</strong> expressions.</p>
+<h2 id="introduction">Introduction</h2>
+<p>In every place where the compiler expects a single number, you can invoke the evaluator by simply using square brackets.</p>
+<pre><code class="language-c">data NumberFour {
+  [2+2]
+}
+</code></pre>
+<p>The evaluator can be also invoked freely outside any section body, e.g. to set variables:</p>
+<pre><code class="language-c">[ FOUR = 4 ]
+</code></pre>
+<p>which can be later used freely as compiler constants and within further evaluator expressions:</p>
+<pre><code class="language-c">data FourFiveSix {
+  FOUR             // value of variable FOUR defined earlier
+  [FIVE = FOUR+1]  // defines variable FIVE and returns its value
+  [FIVE+1]         // uses recently set FIVE value
+}
+</code></pre>
+<h2 id="operators">Operators</h2>
+<p>Available operators and their precedence levels are similar to operators in <strong>C</strong> and <strong>C++</strong>.</p>
+<p>List sorted by precedence from highest to lowest:</p>
+<ul>
+<li>level <strong>2</strong>, associativity: <strong>left-to-right</strong><ul>
+<li><code>++</code> suffix incremen</li>
+<li><code>--</code> suffix decrement</li>
+<li><code>()</code> function call</li>
+<li><code>[]</code> array subscripting</li>
+<li><code>.</code> single argument function call</li>
+</ul>
+</li>
+<li>level <strong>3</strong>, associativity: <strong>right-to-left</strong><ul>
+<li><code>++</code>  prefix increment</li>
+<li><code>--</code>  prefix decrement</li>
+<li><code>+</code>  unary plus</li>
+<li><code>-</code>  unary minus</li>
+<li><code>!</code>  logical NOT</li>
+<li><code>~</code>  bitwise NOT (One's Complement)</li>
+</ul>
+</li>
+<li>level <strong>5</strong>, associativity: <strong>left-to-right</strong><ul>
+<li><code>*</code> multiplication</li>
+<li><code>/</code> division</li>
+<li><code>%</code> modulo (remainder)</li>
+</ul>
+</li>
+<li>level <strong>6</strong>, associativity: <strong>left-to-right</strong><ul>
+<li><code>+</code> addition</li>
+<li><code>-</code> subtraction</li>
+</ul>
+</li>
+<li>level <strong>7</strong>, associativity: <strong>left-to-right</strong><ul>
+<li><code>&lt;&lt;</code>  bitwise left shift</li>
+<li><code>&gt;&gt;</code>  bitwise right shift</li>
+</ul>
+</li>
+<li>level <strong>8</strong>, associativity: <strong>left-to-right</strong><ul>
+<li><code>&lt;</code> less than</li>
+<li><code>&lt;=</code> less than or equal to</li>
+<li><code>&gt;</code> greater than</li>
+<li><code>&gt;=</code> greater than or equal to</li>
+<li><code>?&gt;</code> select greater value (maximum)</li>
+<li><code>?&lt;</code> select smaller value (minimum)</li>
+</ul>
+</li>
+<li>level <strong>9</strong>, associativity: <strong>left-to-right</strong><ul>
+<li><code>==</code> equal to</li>
+<li><code>!=</code> not equal to</li>
+</ul>
+</li>
+<li>level <strong>10</strong>, associativity: <strong>left-to-right</strong><ul>
+<li><code>&amp;</code> bitwise AND</li>
+</ul>
+</li>
+<li>level <strong>11</strong>, associativity: <strong>left-to-right</strong><ul>
+<li><code>^</code> bitwise XOR (exclusive or)</li>
+</ul>
+</li>
+<li>level <strong>12</strong>, associativity: <strong>left-to-right</strong><ul>
+<li><code>|</code> bitwise OR (inclusive or)</li>
+</ul>
+</li>
+<li>level <strong>13</strong>, associativity: <strong>left-to-right</strong><ul>
+<li><code>&amp;&amp;</code> logical AND</li>
+</ul>
+</li>
+<li>level <strong>14</strong>, associativity: <strong>left-to-right</strong><ul>
+<li><code>||</code> logical OR</li>
+</ul>
+</li>
+<li>level <strong>15</strong>, associativity: <strong>right-to-left</strong><ul>
+<li><code>?:</code> ternary conditional</li>
+</ul>
+</li>
+<li>level <strong>16</strong>, associativity: <strong>right-to-left</strong><ul>
+<li><code>=</code>  direct assignment</li>
+<li><code>+=</code>  assignment by sum</li>
+<li><code>-=</code>  assignment by difference</li>
+<li><code>*=</code>  assignment by product</li>
+<li><code>/=</code>  assignment by quotient</li>
+<li><code>%=</code>  assignment by remainder</li>
+<li><code>&lt;&lt;=</code> assignment by bitwise left shift</li>
+<li><code>&gt;&gt;=</code> assignment by bitwise right shift</li>
+<li><code>&amp;=</code>  assignment by bitwise AND</li>
+<li><code>^=</code>  assignment by bitwise XOR</li>
+<li><code>|=</code>  assignment by bitwise OR</li>
+</ul>
+</li>
+<li>level <strong>18</strong>, associativity: <strong>left-to-right</strong><ul>
+<li><code>,</code> expression list (executes in sequence, returns value of the last)</li>
+</ul>
+</li>
+</ul>
+<h2 id="functions">Functions</h2>
+<h3 id="acos-x"><code>acos( x )</code></h3>
+<p>Arcus cosinus</p>
+<hr />
+<h3 id="addbyte-sec-b"><code>addbyte( sec, b )</code></h3>
+<p>Add byte b to section sec</p>
+<hr />
+<h3 id="asin-x"><code>asin( x )</code></h3>
+<p>Arcus sinus</p>
+<hr />
+<h3 id="ceil-x"><code>ceil( x )</code></h3>
+<p>Round up to nearest integer</p>
+<hr />
+<h3 id="clamp-x-min-max"><code>clamp( x, min, max )</code></h3>
+<p>Clamp x to range min to max</p>
+<hr />
+<h3 id="color-r-g-b"><code>color( r, g, b )</code></h3>
+<p>Return palette index for nearest color to color (r,g,b)</p>
+<hr />
+<h3 id="color-x"><code>color( x )</code></h3>
+<p>Return palette index for nearest color specified in format 0xRRGGBB</p>
+<hr />
+<h3 id="cos-x"><code>cos( x )</code></h3>
+<p>Cosinus</p>
+<hr />
+<h3 id="error-err"><code>error( err )</code></h3>
+<p>Print error message err ane terminate compilation</p>
+<hr />
+<h3 id="floor-x"><code>floor( x )</code></h3>
+<p>Round down to nearest integer</p>
+<hr />
+<h3 id="frac-x"><code>frac( x )</code></h3>
+<p>Get fractional part ( x-floor(x) )</p>
+<hr />
+<h3 id="index-tab-x"><code>index( tab, x )</code></h3>
+<p>1-dimensional indexing operator ( same as tab[x] )</p>
+<hr />
+<h3 id="index-tab-x-y"><code>index( tab, x, y )</code></h3>
+<p>2-dimensional indexing operator ( same as tab[x,y] )</p>
+<hr />
+<h3 id="max-a-b"><code>max( a, b )</code></h3>
+<p>Maximum</p>
+<hr />
+<h3 id="min-a-b"><code>min( a, b )</code></h3>
+<p>Minimum</p>
+<hr />
+<h3 id="pow-x-y"><code>pow( x, y )</code></h3>
+<p>Power function</p>
+<hr />
+<h3 id="print-msg"><code>print( msg )</code></h3>
+<p>Print message msg</p>
+<hr />
+<h3 id="rnd"><code>rnd( )</code></h3>
+<p>Random value 0 &lt;= x &lt; 1</p>
+<hr />
+<h3 id="round-x"><code>round( x )</code></h3>
+<p>Round to nearest integer</p>
+<hr />
+<h3 id="sin-x"><code>sin( x )</code></h3>
+<p>Sinus</p>
+<hr />
+<h3 id="size-sec"><code>size( sec )</code></h3>
+<p>Current size of section sec</p>
+<hr />
+<h3 id="sqrt-x"><code>sqrt( x )</code></h3>
+<p>Square root</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../examples/" class="btn btn-neutral float-right" title="Examples">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../instructions/" class="btn btn-neutral" title="Instructions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/Krzysiek-K/k65/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../instructions/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../examples/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
