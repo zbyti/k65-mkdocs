@@ -49,7 +49,7 @@ bank my_bank            // from now on all code and data will go to 'my_bank'
 
 ## Data block definition
 
-Data blocks are defined using data keyword. Defining data block at the same time defines a label to its first element, so the block is accessibl using simple indexing, like `MyData,x`. Datablocks can have optional `alignment` or `no-page-crossing` restrictions enabled.
+Data blocks are defined using data keyword. Defining data block at the same time defines a label to its first element, so the block is accessibl using simple indexing, like `MyData,x`. Datablocks can have optional **alignment** or **no-page-crossing** restrictions enabled.
 
 Examples:
 
@@ -114,7 +114,7 @@ naked inc_x_twice {
 
 ### `inline`
 
-User defined `macro` that is *inlined* in the code when used.
+User defined `macro` that is inlined in the code when used.
 
 ```c
 inline inc_y {

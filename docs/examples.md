@@ -1,5 +1,38 @@
 #
 
+## Scripts
+
+### Project example files
+
+`main.k65proj`
+
+```none
+-system AtariXL
+-lowAddr 0x2000
+
+../../include/defs.k65  main
+main.k65                main
+
+-o main.xex
+
+-link
+!atari800 main.xex
+```
+
+`make`
+
+```none
+K65=${K65_HOME}/bin/k65
+
+all: main clean
+
+main:
+  $(K65) @main.k65proj
+
+clean:
+  rm main.gmap main.lst main.sym
+```
+
 ## Atari 800 XL
 
 ### Rainbow
