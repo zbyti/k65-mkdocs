@@ -284,6 +284,8 @@ Acc|Implied|Imm|Mem|Mem,X|Mem,Y|(Mem,X)|(Mem),Y|(Mem)
 * `*<number>` to wait `<number>` of cycles
 
 
+---
+
 ### `ORA` or with accumulator
 
 Acc|Implied|Imm|Mem|Mem,X|Mem,Y|(Mem,X)|(Mem),Y|(Mem)
