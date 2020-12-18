@@ -153,11 +153,11 @@
 <h2 id="variable-declaration">Variable declaration</h2>
 <p>Variables in <strong>K65</strong> are names given to chosen memory addresses.
 Examples of variable declaration:</p>
-<pre><code class="language-c">var foo=0x80          // declares 'foo' at address 0x80
-var foo2              // declares 'foo2' at address 0x81 (next after previous var)
-var foo3, foo4        // multiple declarations per line allowed
-var bar[10], bar2[10] // [] specifies variable size in bytes (address increment for next var)
-var bar3 ?            // adding '?' at the end of var declaration makes compiler print var addresses
+<pre><code class="language-c">var foo=0x80            // declares 'foo' at address 0x80
+var foo2                // declares 'foo2' at address 0x81 (next after previous var)
+var foo3, foo4          // multiple declarations per line allowed
+var bar[10], bar2[10]   // [] specifies variable size in bytes (address increment for next var)
+var bar3 ?              // adding '?' at the end of var declaration makes compiler print var addresses
 </code></pre>
 <h2 id="constant-declaration">Constant declaration</h2>
 <p>The best way of defining constants is using the <strong>evaluator</strong>. Constants defined this way can be changed at any moment during compilation. Constants can be any value of floating point type. When used within <strong>6502</strong> instruction, they are converted to single byte by rounding to nearest integer and <code>AND</code>-ing with <code>0xFF</code> (this way negative values are represented in U2 form).</p>

@@ -65,6 +65,38 @@
     <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#operators">Operators</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-2">Precedence 2</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-3">Precedence 3</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-5">Precedence 5</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-6">Precedence 6</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-7">Precedence 7</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-8">Precedence 8</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-9">Precedence 9</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-10">Precedence 10</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-11">Precedence 11</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-12">Precedence 12</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-13">Precedence 13</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-14">Precedence 14</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-15">Precedence 15</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-16">Precedence 16</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#precedence-18">Precedence 18</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a>
         <ul>
@@ -187,99 +219,262 @@
 }
 </code></pre>
 <h2 id="operators">Operators</h2>
-<p>Available operators and their precedence levels are similar to operators in <strong>C</strong> and <strong>C++</strong>.</p>
-<p>List sorted by precedence from highest to lowest:</p>
-<ul>
-<li>level <strong>2</strong>, associativity: <strong>left-to-right</strong><ul>
-<li><code>++</code> suffix incremen</li>
-<li><code>--</code> suffix decrement</li>
-<li><code>()</code> function call</li>
-<li><code>[]</code> array subscripting</li>
-<li><code>.</code> single argument function call</li>
-</ul>
-</li>
-<li>level <strong>3</strong>, associativity: <strong>right-to-left</strong><ul>
-<li><code>++</code>  prefix increment</li>
-<li><code>--</code>  prefix decrement</li>
-<li><code>+</code>  unary plus</li>
-<li><code>-</code>  unary minus</li>
-<li><code>!</code>  logical NOT</li>
-<li><code>~</code>  bitwise NOT (One's Complement)</li>
-</ul>
-</li>
-<li>level <strong>5</strong>, associativity: <strong>left-to-right</strong><ul>
-<li><code>*</code> multiplication</li>
-<li><code>/</code> division</li>
-<li><code>%</code> modulo (remainder)</li>
-</ul>
-</li>
-<li>level <strong>6</strong>, associativity: <strong>left-to-right</strong><ul>
-<li><code>+</code> addition</li>
-<li><code>-</code> subtraction</li>
-</ul>
-</li>
-<li>level <strong>7</strong>, associativity: <strong>left-to-right</strong><ul>
-<li><code>&lt;&lt;</code>  bitwise left shift</li>
-<li><code>&gt;&gt;</code>  bitwise right shift</li>
-</ul>
-</li>
-<li>level <strong>8</strong>, associativity: <strong>left-to-right</strong><ul>
-<li><code>&lt;</code> less than</li>
-<li><code>&lt;=</code> less than or equal to</li>
-<li><code>&gt;</code> greater than</li>
-<li><code>&gt;=</code> greater than or equal to</li>
-<li><code>?&gt;</code> select greater value (maximum)</li>
-<li><code>?&lt;</code> select smaller value (minimum)</li>
-</ul>
-</li>
-<li>level <strong>9</strong>, associativity: <strong>left-to-right</strong><ul>
-<li><code>==</code> equal to</li>
-<li><code>!=</code> not equal to</li>
-</ul>
-</li>
-<li>level <strong>10</strong>, associativity: <strong>left-to-right</strong><ul>
-<li><code>&amp;</code> bitwise AND</li>
-</ul>
-</li>
-<li>level <strong>11</strong>, associativity: <strong>left-to-right</strong><ul>
-<li><code>^</code> bitwise XOR (exclusive or)</li>
-</ul>
-</li>
-<li>level <strong>12</strong>, associativity: <strong>left-to-right</strong><ul>
-<li><code>|</code> bitwise OR (inclusive or)</li>
-</ul>
-</li>
-<li>level <strong>13</strong>, associativity: <strong>left-to-right</strong><ul>
-<li><code>&amp;&amp;</code> logical AND</li>
-</ul>
-</li>
-<li>level <strong>14</strong>, associativity: <strong>left-to-right</strong><ul>
-<li><code>||</code> logical OR</li>
-</ul>
-</li>
-<li>level <strong>15</strong>, associativity: <strong>right-to-left</strong><ul>
-<li><code>?:</code> ternary conditional</li>
-</ul>
-</li>
-<li>level <strong>16</strong>, associativity: <strong>right-to-left</strong><ul>
-<li><code>=</code>  direct assignment</li>
-<li><code>+=</code>  assignment by sum</li>
-<li><code>-=</code>  assignment by difference</li>
-<li><code>*=</code>  assignment by product</li>
-<li><code>/=</code>  assignment by quotient</li>
-<li><code>%=</code>  assignment by remainder</li>
-<li><code>&lt;&lt;=</code> assignment by bitwise left shift</li>
-<li><code>&gt;&gt;=</code> assignment by bitwise right shift</li>
-<li><code>&amp;=</code>  assignment by bitwise AND</li>
-<li><code>^=</code>  assignment by bitwise XOR</li>
-<li><code>|=</code>  assignment by bitwise OR</li>
-</ul>
-</li>
-<li>level <strong>18</strong>, associativity: <strong>left-to-right</strong><ul>
-<li><code>,</code> expression list (executes in sequence, returns value of the last)</li>
-</ul>
-</li>
-</ul>
+<p>Available operators and their precedence levels are similar to operators in <strong>C</strong> and <strong>C++</strong>, operators are sorted by precedence from highest to lowest:</p>
+<h3 id="precedence-2">Precedence 2</h3>
+<p>Associativity: <strong>left-to-right</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>++</code><br/><code>--</code><br/><code>()</code><br/><code>[]</code><br/><code>.</code></td>
+<td align="left">suffix incremen<br/>suffix decrement<br/>function call<br/>array subscripting<br/>single argument function call</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-3">Precedence 3</h3>
+<p>Associativity: <strong>right-to-left</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>++</code><br/><code>--</code><br/><code>+</code><br/><code>-</code><br/><code>!</code><br/><code>~</code></td>
+<td align="left">prefix increment<br/>prefix decrement<br/>unary plus<br/>unary minus<br/>logical NOT<br/>bitwise NOT (One's Complement)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-5">Precedence 5</h3>
+<p>Associativity: <strong>left-to-right</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>*</code><br/><code>/</code><br/><code>%</code></td>
+<td align="left">multiplication<br/>division<br/>modulo (remainder)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-6">Precedence 6</h3>
+<p>Associativity: <strong>left-to-right</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>+</code><br/><code>-</code></td>
+<td align="left">addition<br/>subtraction</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-7">Precedence 7</h3>
+<p>Associativity: <strong>left-to-right</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>&lt;&lt;</code><br/><code>&gt;&gt;</code></td>
+<td align="left">bitwise left shift<br/>bitwise right shift</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-8">Precedence 8</h3>
+<p>Associativity: <strong>left-to-right</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>&lt;</code><br/><code>&lt;=</code><br/><code>&gt;</code><br/><code>&gt;=</code><br/><code>?&gt;</code><br/><code>?&lt;</code></td>
+<td align="left">less than<br/>less than or equal to<br/>greater than<br/>greater than or equal to<br/>select greater value (maximum)<br/>select smaller value (minimum)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-9">Precedence 9</h3>
+<p>Associativity: <strong>left-to-right</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>==</code><br/><code>!=</code></td>
+<td align="left">equal to<br/>not equal to</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-10">Precedence 10</h3>
+<p>Associativity: <strong>left-to-right</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Descriptiont</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>&amp;</code></td>
+<td align="left">bitwise AND</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-11">Precedence 11</h3>
+<p>Associativity: <strong>left-to-right</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>^</code></td>
+<td align="left">bitwise XOR (exclusive or)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-12">Precedence 12</h3>
+<p>Associativity: <strong>left-to-right</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>|</code></td>
+<td align="left">bitwise OR (inclusive or)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-13">Precedence 13</h3>
+<p>Associativity: <strong>left-to-right</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>&amp;&amp;</code></td>
+<td align="left">logical AND</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-14">Precedence 14</h3>
+<p>Associativity: <strong>left-to-right</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>||</code></td>
+<td align="left">logical OR</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-15">Precedence 15</h3>
+<p>Associativity: <strong>right-to-left</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>?:</code></td>
+<td align="left">lternary conditional</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-16">Precedence 16</h3>
+<p>Associativity: <strong>right-to-left</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>=</code><br/><code>+=</code><br/><code>-=</code><br/><code>*=</code><br/><code>/=</code><br/><code>%=</code><br/><code>&lt;&lt;=</code><br/><code>&gt;&gt;=</code><br/><code>&amp;=</code><br/><code>^=</code><br/><code>|=</code><br/></td>
+<td align="left">direct assignment<br/>assignment by sum<br/>assignment by difference<br/>assignment by product<br/>assignment by quotient<br/>assignment by remainder<br/>assignment by bitwise left shift<br/>assignment by bitwise right shift<br/>assignment by bitwise AND<br/>assignment by bitwise XOR<br/>assignment by bitwise OR<br/></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="precedence-18">Precedence 18</h3>
+<p>Associativity: <strong>left-to-right</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>,</code></td>
+<td align="left">expression list (executes in sequence, returns value of the last)</td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
 <h2 id="functions">Functions</h2>
 <h3 id="acos-x"><code>acos( x )</code></h3>
 <p>Arcus cosinus</p>
