@@ -180,7 +180,7 @@ Operator|Description
 :---:|:---
 `,`|expression list (executes in sequence, returns value of the last)
 
-<br/>
+---
 
 ## Functions
 

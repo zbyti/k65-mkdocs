@@ -3,6 +3,7 @@
 ```
 mkdocs serve
 mkdocs build
+mkdocs gh-deploy
 ```
 
 [K65 Sources](https://github.com/Krzysiek-K/k65)
