@@ -4,6 +4,29 @@
 
 ## Standard 6502 opcodes
 
+
+[`ADC`](#adc-add-with-carry) [`AND`](#and-and-with-accumulator) [`ASL`](#asl-arithmetic-shift-left)
+[`BCC`](#bcc-branch-on-carry-clear) [`BCS`](#bcs-branch-on-carry-clear) [`BEQ`](#beq-branch-on-equal-zero-set)
+[`BIT`](#bit-bit-test) [`BMI`](#bmi-branch-on-minus-negative-set) [`BNE`](#bne-branch-on-not-equal-zero-clear)
+[`BPL`](#bpl-branch-on-plus-negative-clear) [`BRK`](#brk-interrupt) [`BVC`](#bvc-branch-on-overflow-clear)
+[`BVS`](#bvs-branch-on-overflow-set) [`CLC`](#clc-clear-carry) [`CLD`](#cld-clear-decimal)
+[`CLI`](#cli-clear-interrupt-disable) [`CLV`](#clv-clear-overflow) [`CMP`](#cmp-compare-with-accumulator)
+[`CPX`](#cpx-compare-with-x) [`CPY`](#cpy-compare-with-y) [`DEC`](#dec-decrement)
+[`DEX`](#dex-decrement-x) [`DEY`](#dey-decrement-y) [`EOR`](#eor-exclusive-or-with-accumulator)
+[`INC`](#inc-increment) [`INX`](#inx-increment-x) [`INY`](#iny-increment-y)
+[`JMP`](#jmp-jump) [`JSR`](#jsr-jump-subroutine) [`LDA`](#lda-load-accumulator)
+[`LDX`](#ldx-load-x) [`LDY`](#ldy-load-y) [`LSR`](#lsr-logical-shift-right)
+[`NOP`](#nop-no-operation) [`ORA`](#ora-or-with-accumulator) [`PHA`](#pha-push-accumulator)
+[`PHP`](#php-push-processor-status-sr) [`PLA`](#pla-pull-accumulator) [`PLP`](#plp-pull-processor-status-sr)
+[`ROL`](#rol-rotate-left) [`ROR`](#ror-rotate-right) [`RTI`](#rti-return-from-interrupt)
+[`RTS`](#rts-return-from-subroutine) [`SBC`](#sbc-subtract-with-carry) [`SEC`](#sec-set-carry)
+[`SED`](#sed-set-decimal) [`SEI`](#sei-set-interrupt-disable) [`STA`](#sta-store-accumulator)
+[`STX`](#stx-store-x) [`STY`](#sty-store-y) [`TAX`](#tax-transfer-accumulator-to-x)
+[`TAY`](#tay-transfer-accumulator-to-y) [`TSX`](#tsx-transfer-stack-pointer-to-x) [`TXA`](#txa-transfer-x-to-accumulator)
+[`TXS`](#txs-transfer-x-to-stack-pointer) [`TYA`](#tya-transfer-y-to-accumulator)
+
+---
+
 ### `ADC` add with carry
 
 Acc|Implied|Imm|Mem|Mem,X|Mem,Y|(Mem,X)|(Mem),Y|(Mem)
@@ -222,7 +245,7 @@ Acc|Implied|Imm|Mem|Mem,X|Mem,Y|(Mem,X)|(Mem),Y|(Mem)
 
 ---
 
-### `INY` increment X
+### `INY` increment Y
 
 Acc|Implied|Imm|Mem|Mem,X|Mem,Y|(Mem,X)|(Mem),Y|(Mem)
 :---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:
