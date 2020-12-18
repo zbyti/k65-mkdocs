@@ -30,69 +30,157 @@ data FourFiveSix {
 
 ## Operators
 
-Available operators and their precedence levels are similar to operators in **C** and **C++**.
+Available operators and their precedence levels are similar to operators in **C** and **C++**, operators are sorted by precedence from highest to lowest:
 
-List sorted by precedence from highest to lowest:
+### Precedence 2
 
-* level __2__, associativity: **left-to-right**
-    * `++` suffix incremen
-    * `--` suffix decrement
-    * `()` function call
-    * `[]` array subscripting
-    * `.` single argument function call
-* level __3__, associativity: **right-to-left**
-    * `++`  prefix increment
-    * `--`  prefix decrement
-    * `+`  unary plus
-    * `-`  unary minus
-    * `!`  logical NOT
-    * `~`  bitwise NOT (One's Complement)
-* level __5__, associativity: **left-to-right**
-    * `*` multiplication
-    * `/` division
-    * `%` modulo (remainder)
-* level __6__, associativity: **left-to-right**
-    * `+` addition
-    * `-` subtraction
-* level __7__, associativity: **left-to-right**
-    * `<<`  bitwise left shift
-    * `>>`  bitwise right shift
-* level __8__, associativity: **left-to-right**
-    * `<` less than
-    * `<=` less than or equal to
-    * `>` greater than
-    * `>=` greater than or equal to
-    * `?>` select greater value (maximum)
-    * `?<` select smaller value (minimum)
-* level __9__, associativity: **left-to-right**
-    * `==` equal to
-    * `!=` not equal to
-* level __10__, associativity: **left-to-right**
-    * `&` bitwise AND
-* level __11__, associativity: **left-to-right**
-    * `^` bitwise XOR (exclusive or)
-* level __12__, associativity: **left-to-right**
-    * `|` bitwise OR (inclusive or)
-* level __13__, associativity: **left-to-right**
-    * `&&` logical AND
-* level __14__, associativity: **left-to-right**
-    * `||` logical OR
-* level __15__, associativity: **right-to-left**
-    * `?:` ternary conditional
-* level __16__, associativity: **right-to-left**
-    * `= `  direct assignment
-    * `+=`  assignment by sum
-    * `-=`  assignment by difference
-    * `*=`  assignment by product
-    * `/=`  assignment by quotient
-    * `%=`  assignment by remainder
-    * `<<=` assignment by bitwise left shift
-    * `>>=` assignment by bitwise right shift
-    * `&=`  assignment by bitwise AND
-    * `^=`  assignment by bitwise XOR
-    * `|=`  assignment by bitwise OR
-* level __18__, associativity: **left-to-right**
-    * `,` expression list (executes in sequence, returns value of the last)
+Associativity: **left-to-right**
+
+Operator|Description
+:---:|:---
+`++`<br/>`--`<br/>`()`<br/>`[]`<br/>`.` |suffix incremen<br/>suffix decrement<br/>function call<br/>array subscripting<br/>single argument function call
+
+---
+
+### Precedence 3
+
+Associativity: **right-to-left**
+
+Operator|Description
+:---:|:---
+`++`<br/>`--`<br/>`+`<br/>`-`<br/>`!`<br/>`~`|prefix increment<br/>prefix decrement<br/>unary plus<br/>unary minus<br/>logical NOT<br/>bitwise NOT (One's Complement)
+
+---
+
+### Precedence 5
+
+Associativity: **left-to-right**
+
+Operator|Description
+:---:|:---
+`*`<br/>`/`<br/>`%`|multiplication<br/>division<br/>modulo (remainder)
+
+---
+
+### Precedence 6
+
+Associativity: **left-to-right**
+
+Operator|Description
+:---:|:---
+`+`<br/>`-`|addition<br/>subtraction
+
+---
+
+### Precedence 7
+
+Associativity: **left-to-right**
+
+Operator|Description
+:---:|:---
+`<<`<br/>`>>`|bitwise left shift<br/>bitwise right shift
+
+---
+
+### Precedence 8
+
+Associativity: **left-to-right**
+
+Operator|Description
+:---:|:---
+`<`<br/>`<=`<br/>`>`<br/>`>=`<br/>`?>`<br/>`?<`|less than<br/>less than or equal to<br/>greater than<br/>greater than or equal to<br/>select greater value (maximum)<br/>select smaller value (minimum)
+
+---
+
+### Precedence 9
+
+Associativity: **left-to-right**
+
+Operator|Description
+:---:|:---
+`==`<br/>`!=`|equal to<br/>not equal to
+
+---
+
+### Precedence 10
+
+Associativity: **left-to-right**
+
+Operator|Descriptiont
+:---:|:---
+`&`|bitwise AND
+
+---
+
+### Precedence 11
+
+Associativity: **left-to-right**
+
+Operator|Description
+:---:|:---
+`^`|bitwise XOR (exclusive or)
+
+---
+
+### Precedence 12
+
+Associativity: **left-to-right**
+
+Operator|Description
+:---:|:---
+`|`|bitwise OR (inclusive or)
+
+---
+
+### Precedence 13
+
+Associativity: **left-to-right**
+
+Operator|Description
+:---:|:---
+`&&`|logical AND
+
+---
+
+### Precedence 14
+
+Associativity: **left-to-right**
+
+Operator|Description
+:---:|:---
+`||`|logical OR
+
+---
+
+### Precedence 15
+
+Associativity: **right-to-left**
+
+Operator|Description
+:---:|:---
+`?:`|lternary conditional
+
+---
+
+### Precedence 16
+
+Associativity: **right-to-left**
+
+Operator|Description
+:---:|:---
+`=`<br/>`+=`<br/>`-=`<br/>`*=`<br/>`/=`<br/>`%=`<br/>`<<=`<br/>`>>=`<br/>`&=`<br/>`^=`<br/>`|=`<br/>|direct assignment<br/>assignment by sum<br/>assignment by difference<br/>assignment by product<br/>assignment by quotient<br/>assignment by remainder<br/>assignment by bitwise left shift<br/>assignment by bitwise right shift<br/>assignment by bitwise AND<br/>assignment by bitwise XOR<br/>assignment by bitwise OR<br/>
+
+---
+
+### Precedence 18
+
+Associativity: **left-to-right**
+
+Operator|Description
+:---:|:---
+`,`|expression list (executes in sequence, returns value of the last)
+
+<br/>
 
 ## Functions
 
