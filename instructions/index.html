@@ -58,6 +58,16 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Instructions</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#address-modes">Address Modes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#registers">Registers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sr-flags-nv-bdizc">SR Flags NV-BDIZC</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#processor-stack">Processor Stack</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bytes-words-addressing">Bytes, Words, Addressing</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#standard-6502-opcodes">Standard 6502 opcodes</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#adc-add-with-carry">ADC add with carry</a>
@@ -68,7 +78,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#bcc-branch-on-carry-clear">BCC branch on carry clear</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#bcs-branch-on-carry-clear">BCS branch on carry clear</a>
+    <li class="toctree-l3"><a class="reference internal" href="#bcs-branch-on-carry-set">BCS branch on carry set</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#beq-branch-on-equal-zero-set">BEQ branch on equal (zero set)</a>
     </li>
@@ -174,6 +184,12 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#note">Note</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#legend-to-flags">Legend to Flags:</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -233,8 +249,65 @@
             <div class="section">
               
                 <h1 id="_1"></h1>
-<p><strong>K65</strong> compiler supports following 6502 instructions. <strong>TBD</strong> value means that instruction support is planned, but currently not implemented.</p>
+<h2 id="address-modes"><a href="https://www.masswerk.at/6502/6502_instruction_set.html">Address Modes</a></h2>
+<ul>
+<li><code>A</code> accumulator <code>OPC A</code> operand is AC (implied single byte instruction)</li>
+<li><code>abs</code> absolute <code>OPC $LLHH</code> operand is address <code>$HHLL</code> *</li>
+<li><code>abs,X</code> absolute, X-indexed <code>OPC $LLHH,X</code> operand is address; effective address is address incremented by X with carry **</li>
+<li><code>abs,Y</code> absolute, Y-indexed <code>OPC $LLHH,Y</code> operand is address; effective address is address incremented by Y with carry **</li>
+<li><code>#</code> immediate <code>OPC #$BB</code> operand is byte <code>BB</code></li>
+<li><code>impl</code> implied <code>OPC</code> operand implied</li>
+<li><code>ind</code> indirect <code>OPC ($LLHH)</code> operand is address; effective address is contents of word at address: <code>C.w($HHLL)</code></li>
+<li><code>X,ind</code> X-indexed, indirect <code>OPC ($LL,X)</code> operand is zeropage address; effective address is word in (LL + X, LL + X + 1), inc. without carry: <code>C.w($00LL + X)</code></li>
+<li><code>ind,Y</code> indirect, Y-indexed <code>OPC ($LL),Y</code>   operand is zeropage address; effective address is word in (LL, LL + 1) incremented by Y with carry: <code>C.w($00LL) + Y</code></li>
+<li><code>rel</code> relative <code>OPC $BB</code> branch target is PC + signed offset <code>BB</code> ***</li>
+<li><code>zpg</code> zeropage <code>OPC $LL</code> operand is zeropage address (hi-byte is zero, address = <code>$00LL</code>)</li>
+<li><code>zpg,X</code> zeropage, X-indexed <code>OPC $LL,X</code> operand is zeropage address; effective address is address incremented by X without carry **</li>
+<li><code>zpg,Y</code> zeropage, Y-indexed <code>OPC $LL,Y</code> operand is zeropage address; effective address is address incremented by Y without carry **</li>
+</ul>
+<p>*   16-bit address words are <a href="https://en.wikipedia.org/wiki/Endianness">little endian</a>, lo(w)-byte first, followed by the hi(gh)-byte. An assembler will use a human readable, big-endian notation as in <code>$HHLL</code>.</p>
+<p>**  The available 16-bit address space is conceived as consisting of pages of 256 bytes each, with
+address hi-bytes represententing the page index. An increment with carry may affect the hi-byte
+and may thus result in a crossing of page boundaries, adding an extra cycle to the execution.
+Increments without carry do not affect the hi-byte of an address and no page transitions do occur.
+Generally, increments of 16-bit addresses include a carry, increments of zeropage addresses don't.
+Notably this is not related in any way to the state of the carry bit of the accumulator.</p>
+<p>*** Branch offsets are signed 8-bit values, <code>-128 ... +127</code>, negative offsets in two's complement.
+Page transitions may occur and add an extra cycle to the exucution.</p>
+<h2 id="registers">Registers</h2>
+<ul>
+<li><code>PC</code> program counter (16 bit)</li>
+<li><code>AC</code> accumulator (8 bit)</li>
+<li><code>X</code> X register  (8 bit)</li>
+<li><code>Y</code> Y register  (8 bit)</li>
+<li><code>SR</code> status register <strong>NV-BDIZC</strong> (8 bit)</li>
+<li><code>SP</code> stack pointer (8 bit)</li>
+</ul>
+<h2 id="sr-flags-nv-bdizc">SR Flags NV-BDIZC</h2>
+<pre><code>bit 7 to bit 0
+
+N ....  Negative
+V ....  Overflow
+- ....  ignored
+B ....  Break
+D ....  Decimal (use BCD for arithmetics)
+I ....  Interrupt (IRQ disable)
+Z ....  Zero
+C ....  Carry
+</code></pre>
+<h2 id="processor-stack">Processor Stack</h2>
+<p><strong>LIFO</strong>, top down, 8 bit range <code>0x0100 - 0x01FF</code></p>
+<h2 id="bytes-words-addressing">Bytes, Words, Addressing</h2>
+<p>8 bit bytes, 16 bit words in lobyte-hibyte representation (<strong>Little-Endian</strong>).
+16 bit address range, operands follow instruction codes.</p>
+<p>Signed values are two's complement, sign in bit 7 (most significant bit).</p>
+<ul>
+<li><code>%11111111</code> = <code>$FF</code> = <code>-1</code></li>
+<li><code>%10000000</code> = <code>$80</code> = <code>-128</code></li>
+<li><code>%01111111</code> = <code>$7F</code> = <code>+127</code></li>
+</ul>
 <h2 id="standard-6502-opcodes">Standard 6502 opcodes</h2>
+<p><strong>K65</strong> compiler supports following 6502 instructions. <strong>TBD</strong> value means that instruction support is planned, but currently not implemented.</p>
 <p><a href="#adc-add-with-carry"><code>ADC</code></a> <a href="#and-and-with-accumulator"><code>AND</code></a> <a href="#asl-arithmetic-shift-left"><code>ASL</code></a>
 <a href="#bcc-branch-on-carry-clear"><code>BCC</code></a> <a href="#bcs-branch-on-carry-clear"><code>BCS</code></a> <a href="#beq-branch-on-equal-zero-set"><code>BEQ</code></a>
 <a href="#bit-bit-test"><code>BIT</code></a> <a href="#bmi-branch-on-minus-negative-set"><code>BMI</code></a> <a href="#bne-branch-on-not-equal-zero-clear"><code>BNE</code></a>
@@ -284,6 +357,22 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">ADC  Add Memory to Accumulator with Carry
+
+     A + M + C -&gt; A, C                N Z C I D V
+                                      + + + - - +
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     immidiate     ADC #oper     69    2     2
+     zeropage      ADC oper      65    2     3
+     zeropage,X    ADC oper,X    75    2     4
+     absolute      ADC oper      6D    3     4
+     absolute,X    ADC oper,X    7D    3     4*
+     absolute,Y    ADC oper,Y    79    3     4*
+     (indirect,X)  ADC (oper,X)  61    2     6
+     (indirect),Y  ADC (oper),Y  71    2     5*
+</code></pre>
 <hr />
 <h3 id="and-and-with-accumulator"><code>AND</code> and (with accumulator)</h3>
 <table>
@@ -314,6 +403,22 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">AND  AND Memory with Accumulator
+
+     A AND M -&gt; A                     N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     immidiate     AND #oper     29    2     2
+     zeropage      AND oper      25    2     3
+     zeropage,X    AND oper,X    35    2     4
+     absolute      AND oper      2D    3     4
+     absolute,X    AND oper,X    3D    3     4*
+     absolute,Y    AND oper,Y    39    3     4*
+     (indirect,X)  AND (oper,X)  21    2     6
+     (indirect),Y  AND (oper),Y  31    2     5*
+</code></pre>
 <hr />
 <h3 id="asl-arithmetic-shift-left"><code>ASL</code> arithmetic shift left</h3>
 <table>
@@ -344,6 +449,19 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">ASL  Shift Left One Bit (Memory or Accumulator)
+
+     C &lt;- [76543210] &lt;- 0             N Z C I D V
+                                      + + + - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     accumulator   ASL A         0A    1     2
+     zeropage      ASL oper      06    2     5
+     zeropage,X    ASL oper,X    16    2     6
+     absolute      ASL oper      0E    3     6
+     absolute,X    ASL oper,X    1E    3     7
+</code></pre>
 <hr />
 <h3 id="bcc-branch-on-carry-clear"><code>BCC</code> branch on carry clear</h3>
 <ul>
@@ -354,8 +472,17 @@
 <li><code>c- goto label</code></li>
 <li><code>{ ... } c-</code></li>
 </ul>
+<pre><code class="language-none">BCC  Branch on Carry Clear
+
+     branch on C = 0                  N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     relative      BCC oper      90    2     2**
+</code></pre>
 <hr />
-<h3 id="bcs-branch-on-carry-clear"><code>BCS</code> branch on carry clear</h3>
+<h3 id="bcs-branch-on-carry-set"><code>BCS</code> branch on carry set</h3>
 <ul>
 <li><code>&lt;{ ... }</code></li>
 <li><code>&gt;= goto label</code></li>
@@ -364,6 +491,15 @@
 <li><code>c+ goto label</code></li>
 <li><code>{ ... } c+</code></li>
 </ul>
+<pre><code class="language-none">BCS  Branch on Carry Set
+
+     branch on C = 1                  N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     relative      BCS oper      B0    2     2**
+</code></pre>
 <hr />
 <h3 id="beq-branch-on-equal-zero-set"><code>BEQ</code> branch on equal (zero set)</h3>
 <ul>
@@ -371,6 +507,15 @@
 <li><code>== goto label</code></li>
 <li><code>{ ... } ==</code></li>
 </ul>
+<pre><code class="language-none">BEQ  Branch on Result Zero
+
+     branch on Z = 1                  N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     relative      BEQ oper      F0    2     2**
+</code></pre>
 <hr />
 <h3 id="bit-bit-test"><code>BIT</code> bit test</h3>
 <table>
@@ -401,6 +546,19 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">BIT  Test Bits in Memory with Accumulator
+
+     bits 7 and 6 of operand are transfered to bit 7 and 6 of SR (N,V);
+     the zeroflag is set to the result of operand AND accumulator.
+
+     A AND M, M7 -&gt; N, M6 -&gt; V        N Z C I D V
+                                     M7 + - - - M6
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     zeropage      BIT oper      24    2     3
+     absolute      BIT oper      2C    3     4
+</code></pre>
 <hr />
 <h3 id="bmi-branch-on-minus-negative-set"><code>BMI</code> branch on minus (negative set)</h3>
 <ul>
@@ -408,6 +566,15 @@
 <li><code>&lt;0 goto label</code></li>
 <li><code>{ ... } &lt;0</code></li>
 </ul>
+<pre><code class="language-none">BMI  Branch on Result Minus
+
+     branch on N = 1                  N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     relative      BMI oper      30    2     2**
+</code></pre>
 <hr />
 <h3 id="bne-branch-on-not-equal-zero-clear"><code>BNE</code> branch on not equal (zero clear)</h3>
 <ul>
@@ -415,6 +582,15 @@
 <li><code>!= goto label</code></li>
 <li><code>{ ... } !=</code></li>
 </ul>
+<pre><code>BNE  Branch on Result not Zero
+
+     branch on Z = 0                  N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     relative      BNE oper      D0    2     2**
+</code></pre>
 <hr />
 <h3 id="bpl-branch-on-plus-negative-clear"><code>BPL</code> branch on plus (negative clear)</h3>
 <ul>
@@ -422,9 +598,27 @@
 <li><code>&gt;=0 goto label</code></li>
 <li><code>{ ... } &gt;=0</code></li>
 </ul>
+<pre><code class="language-none">BPL  Branch on Result Plus
+
+     branch on N = 0                  N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     relative      BPL oper      10    2     2**
+</code></pre>
 <hr />
 <h3 id="brk-interrupt"><code>BRK</code> interrupt</h3>
 <p>/* TBD */</p>
+<pre><code class="language-none">BRK  Force Break
+
+     interrupt,                       N Z C I D V
+     push PC+2, push SR               - - - 1 - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       BRK           00    1     7
+</code></pre>
 <hr />
 <h3 id="bvc-branch-on-overflow-clear"><code>BVC</code> branch on overflow clear</h3>
 <ul>
@@ -435,6 +629,15 @@
 <li><code>o- goto label</code></li>
 <li><code>{ ... } o-</code></li>
 </ul>
+<pre><code class="language-none">BVC  Branch on Overflow Clear
+
+     branch on V = 0                  N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     relative      BVC oper      50    2     2**
+</code></pre>
 <hr />
 <h3 id="bvs-branch-on-overflow-set"><code>BVS</code> branch on overflow set</h3>
 <ul>
@@ -445,6 +648,15 @@
 <li><code>o+ goto label</code></li>
 <li><code>{ ... } o+</code></li>
 </ul>
+<pre><code class="language-none">BVS  Branch on Overflow Set
+
+     branch on V = 1                  N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     relative      BVC oper      70    2     2**
+</code></pre>
 <hr />
 <h3 id="clc-clear-carry"><code>CLC</code> clear carry</h3>
 <table>
@@ -475,6 +687,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">CLC  Clear Carry Flag
+
+     0 -&gt; C                           N Z C I D V
+                                      - - 0 - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       CLC           18    1     2
+</code></pre>
 <hr />
 <h3 id="cld-clear-decimal"><code>CLD</code> clear decimal</h3>
 <table>
@@ -505,6 +726,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">CLD  Clear Decimal Mode
+
+     0 -&gt; D                           N Z C I D V
+                                      - - - - 0 -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       CLD           D8    1     2
+</code></pre>
 <hr />
 <h3 id="cli-clear-interrupt-disable"><code>CLI</code> clear interrupt disable</h3>
 <table>
@@ -535,6 +765,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">CLI  Clear Interrupt Disable Bit
+
+     0 -&gt; I                           N Z C I D V
+                                      - - - 0 - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       CLI           58    1     2
+</code></pre>
 <hr />
 <h3 id="clv-clear-overflow"><code>CLV</code> clear overflow</h3>
 <table>
@@ -565,6 +804,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">CLV  Clear Overflow Flag
+
+     0 -&gt; V                           N Z C I D V
+                                      - - - - - 0
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       CLV           B8    1     2
+</code></pre>
 <hr />
 <h3 id="cmp-compare-with-accumulator"><code>CMP</code> compare (with accumulator)</h3>
 <table>
@@ -595,6 +843,22 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">CMP  Compare Memory with Accumulator
+
+     A - M                            N Z C I D V
+                                    + + + - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     immidiate     CMP #oper     C9    2     2
+     zeropage      CMP oper      C5    2     3
+     zeropage,X    CMP oper,X    D5    2     4
+     absolute      CMP oper      CD    3     4
+     absolute,X    CMP oper,X    DD    3     4*
+     absolute,Y    CMP oper,Y    D9    3     4*
+     (indirect,X)  CMP (oper,X)  C1    2     6
+     (indirect),Y  CMP (oper),Y  D1    2     5*
+</code></pre>
 <hr />
 <h3 id="cpx-compare-with-x"><code>CPX</code> compare with X</h3>
 <table>
@@ -625,6 +889,17 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">CPX  Compare Memory and Index X
+
+     X - M                            N Z C I D V
+                                      + + + - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     immidiate     CPX #oper     E0    2     2
+     zeropage      CPX oper      E4    2     3
+     absolute      CPX oper      EC    3     4
+</code></pre>
 <hr />
 <h3 id="cpy-compare-with-y"><code>CPY</code> compare with Y</h3>
 <table>
@@ -655,6 +930,17 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">CPY  Compare Memory and Index Y
+
+     Y - M                            N Z C I D V
+                                      + + + - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     immidiate     CPY #oper     C0    2     2
+     zeropage      CPY oper      C4    2     3
+     absolute      CPY oper      CC    3     4
+</code></pre>
 <hr />
 <h3 id="dec-decrement"><code>DEC</code> decrement</h3>
 <table>
@@ -685,6 +971,18 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">DEC  Decrement Memory by One
+
+     M - 1 -&gt; M                       N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     zeropage      DEC oper      C6    2     5
+     zeropage,X    DEC oper,X    D6    2     6
+     absolute      DEC oper      CE    3     6
+     absolute,X    DEC oper,X    DE    3     7
+</code></pre>
 <hr />
 <h3 id="dex-decrement-x"><code>DEX</code> decrement X</h3>
 <table>
@@ -715,6 +1013,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">DEX  Decrement Index X by One
+
+     X - 1 -&gt; X                       N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       DEC           CA    1     2
+</code></pre>
 <hr />
 <h3 id="dey-decrement-y"><code>DEY</code> decrement Y</h3>
 <table>
@@ -745,6 +1052,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">DEY  Decrement Index Y by One
+
+     Y - 1 -&gt; Y                       N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       DEC           88    1     2
+</code></pre>
 <hr />
 <h3 id="eor-exclusive-or-with-accumulator"><code>EOR</code> exclusive or (with accumulator)</h3>
 <table>
@@ -775,6 +1091,22 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">EOR  Exclusive-OR Memory with Accumulator
+
+     A EOR M -&gt; A                     N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     immidiate     EOR #oper     49    2     2
+     zeropage      EOR oper      45    2     3
+     zeropage,X    EOR oper,X    55    2     4
+     absolute      EOR oper      4D    3     4
+     absolute,X    EOR oper,X    5D    3     4*
+     absolute,Y    EOR oper,Y    59    3     4*
+     (indirect,X)  EOR (oper,X)  41    2     6
+     (indirect),Y  EOR (oper),Y  51    2     5*
+</code></pre>
 <hr />
 <h3 id="inc-increment"><code>INC</code> increment</h3>
 <table>
@@ -805,6 +1137,18 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">INC  Increment Memory by One
+
+     M + 1 -&gt; M                       N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     zeropage      INC oper      E6    2     5
+     zeropage,X    INC oper,X    F6    2     6
+     absolute      INC oper      EE    3     6
+     absolute,X    INC oper,X    FE    3     7
+</code></pre>
 <hr />
 <h3 id="inx-increment-x"><code>INX</code> increment X</h3>
 <table>
@@ -835,6 +1179,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">INX  Increment Index X by One
+
+     X + 1 -&gt; X                       N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       INX           E8    1     2
+</code></pre>
 <hr />
 <h3 id="iny-increment-y"><code>INY</code> increment Y</h3>
 <table>
@@ -865,6 +1218,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">INY  Increment Index Y by One
+
+     Y + 1 -&gt; Y                       N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       INY           C8    1     2
+</code></pre>
 <hr />
 <h3 id="jmp-jump"><code>JMP</code> jump</h3>
 <table>
@@ -895,6 +1257,16 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">JMP  Jump to New Location
+
+     (PC+1) -&gt; PCL                    N Z C I D V
+     (PC+2) -&gt; PCH                    - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     absolute      JMP oper      4C    3     3
+     indirect      JMP (oper)    6C    3     5
+</code></pre>
 <hr />
 <h3 id="jsr-jump-subroutine"><code>JSR</code> jump subroutine</h3>
 <table>
@@ -925,6 +1297,16 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">JSR  Jump to New Location Saving Return Address
+
+     push (PC+2),                     N Z C I D V
+     (PC+1) -&gt; PCL                    - - - - - -
+     (PC+2) -&gt; PCH
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     absolute      JSR oper      20    3     6
+</code></pre>
 <hr />
 <h3 id="lda-load-accumulator"><code>LDA</code> load accumulator</h3>
 <table>
@@ -955,6 +1337,22 @@
 </tr>
 </tbody>
 </table>
+<pre><code>LDA  Load Accumulator with Memory
+
+     M -&gt; A                           N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     immidiate     LDA #oper     A9    2     2
+     zeropage      LDA oper      A5    2     3
+     zeropage,X    LDA oper,X    B5    2     4
+     absolute      LDA oper      AD    3     4
+     absolute,X    LDA oper,X    BD    3     4*
+     absolute,Y    LDA oper,Y    B9    3     4*
+     (indirect,X)  LDA (oper,X)  A1    2     6
+     (indirect),Y  LDA (oper),Y  B1    2     5*
+</code></pre>
 <hr />
 <h3 id="ldx-load-x"><code>LDX</code> load X</h3>
 <table>
@@ -985,6 +1383,19 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">LDX  Load Index X with Memory
+
+     M -&gt; X                           N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     immidiate     LDX #oper     A2    2     2
+     zeropage      LDX oper      A6    2     3
+     zeropage,Y    LDX oper,Y    B6    2     4
+     absolute      LDX oper      AE    3     4
+     absolute,Y    LDX oper,Y    BE    3     4*
+</code></pre>
 <hr />
 <h3 id="ldy-load-y"><code>LDY</code> load Y</h3>
 <table>
@@ -1015,6 +1426,19 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">LDY  Load Index Y with Memory
+
+     M -&gt; Y                           N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     immidiate     LDY #oper     A0    2     2
+     zeropage      LDY oper      A4    2     3
+     zeropage,X    LDY oper,X    B4    2     4
+     absolute      LDY oper      AC    3     4
+     absolute,X    LDY oper,X    BC    3     4*
+</code></pre>
 <hr />
 <h3 id="lsr-logical-shift-right"><code>LSR</code> logical shift right</h3>
 <table>
@@ -1045,12 +1469,34 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">LSR  Shift One Bit Right (Memory or Accumulator)
+
+     0 -&gt; [76543210] -&gt; C             N Z C I D V
+                                      0 + + - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     accumulator   LSR A         4A    1     2
+     zeropage      LSR oper      46    2     5
+     zeropage,X    LSR oper,X    56    2     6
+     absolute      LSR oper      4E    3     6
+     absolute,X    LSR oper,X    5E    3     7
+</code></pre>
 <hr />
 <h3 id="nop-no-operation"><code>NOP</code> no operation</h3>
 <ul>
 <li><code>*</code> for single NOP</li>
 <li><code>*&lt;number&gt;</code> to wait <code>&lt;number&gt;</code> of cycles</li>
 </ul>
+<pre><code class="language-none">NOP  No Operation
+
+     ---                              N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       NOP           EA    1     2
+</code></pre>
 <hr />
 <h3 id="ora-or-with-accumulator"><code>ORA</code> or with accumulator</h3>
 <table>
@@ -1081,6 +1527,22 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">ORA  OR Memory with Accumulator
+
+     A OR M -&gt; A                      N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     immidiate     ORA #oper     09    2     2
+     zeropage      ORA oper      05    2     3
+     zeropage,X    ORA oper,X    15    2     4
+     absolute      ORA oper      0D    3     4
+     absolute,X    ORA oper,X    1D    3     4*
+     absolute,Y    ORA oper,Y    19    3     4*
+     (indirect,X)  ORA (oper,X)  01    2     6
+     (indirect),Y  ORA (oper),Y  11    2     5*
+</code></pre>
 <hr />
 <h3 id="pha-push-accumulator"><code>PHA</code> push accumulator</h3>
 <table>
@@ -1111,6 +1573,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">PHA  Push Accumulator on Stack
+
+     push A                           N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       PHA           48    1     3
+</code></pre>
 <hr />
 <h3 id="php-push-processor-status-sr"><code>PHP</code> push processor status (SR)</h3>
 <table>
@@ -1141,6 +1612,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">PHP  Push Processor Status on Stack
+
+     push SR                          N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       PHP           08    1     3
+</code></pre>
 <hr />
 <h3 id="pla-pull-accumulator"><code>PLA</code> pull accumulator</h3>
 <table>
@@ -1171,6 +1651,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">PLA  Pull Accumulator from Stack
+
+     pull A                           N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       PLA           68    1     4
+</code></pre>
 <hr />
 <h3 id="plp-pull-processor-status-sr"><code>PLP</code> pull processor status (SR)</h3>
 <table>
@@ -1201,6 +1690,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">PLP  Pull Processor Status from Stack
+
+     pull SR                          N Z C I D V
+                                      from stack
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       PLP           28    1     4
+</code></pre>
 <hr />
 <h3 id="rol-rotate-left"><code>ROL</code> rotate left</h3>
 <table>
@@ -1231,6 +1729,19 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">ROL  Rotate One Bit Left (Memory or Accumulator)
+
+     C &lt;- [76543210] &lt;- C             N Z C I D V
+                                      + + + - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     accumulator   ROL A         2A    1     2
+     zeropage      ROL oper      26    2     5
+     zeropage,X    ROL oper,X    36    2     6
+     absolute      ROL oper      2E    3     6
+     absolute,X    ROL oper,X    3E    3     7
+</code></pre>
 <hr />
 <h3 id="ror-rotate-right"><code>ROR</code> rotate right</h3>
 <table>
@@ -1261,6 +1772,19 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">ROR  Rotate One Bit Right (Memory or Accumulator)
+
+     C -&gt; [76543210] -&gt; C             N Z C I D V
+                                      + + + - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     accumulator   ROR A         6A    1     2
+     zeropage      ROR oper      66    2     5
+     zeropage,X    ROR oper,X    76    2     6
+     absolute      ROR oper      6E    3     6
+     absolute,X    ROR oper,X    7E    3     7
+</code></pre>
 <hr />
 <h3 id="rti-return-from-interrupt"><code>RTI</code> return from interrupt</h3>
 <table>
@@ -1291,6 +1815,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">RTI  Return from Interrupt
+
+     pull SR, pull PC                 N Z C I D V
+                                      from stack
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       RTI           40    1     6
+</code></pre>
 <hr />
 <h3 id="rts-return-from-subroutine"><code>RTS</code> return from subroutine</h3>
 <table>
@@ -1321,6 +1854,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">RTS  Return from Subroutine
+
+     pull PC, PC+1 -&gt; PC              N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       RTS           60    1     6
+</code></pre>
 <hr />
 <h3 id="sbc-subtract-with-carry"><code>SBC</code> subtract with carry</h3>
 <table>
@@ -1351,6 +1893,22 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">SBC  Subtract Memory from Accumulator with Borrow
+
+     A - M - C -&gt; A                   N Z C I D V
+                                      + + + - - +
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     immidiate     SBC #oper     E9    2     2
+     zeropage      SBC oper      E5    2     3
+     zeropage,X    SBC oper,X    F5    2     4
+     absolute      SBC oper      ED    3     4
+     absolute,X    SBC oper,X    FD    3     4*
+     absolute,Y    SBC oper,Y    F9    3     4*
+     (indirect,X)  SBC (oper,X)  E1    2     6
+     (indirect),Y  SBC (oper),Y  F1    2     5*
+</code></pre>
 <hr />
 <h3 id="sec-set-carry"><code>SEC</code> set carry</h3>
 <table>
@@ -1381,6 +1939,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">SEC  Set Carry Flag
+
+     1 -&gt; C                           N Z C I D V
+                                      - - 1 - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       SEC           38    1     2
+</code></pre>
 <hr />
 <h3 id="sed-set-decimal"><code>SED</code> set decimal</h3>
 <table>
@@ -1411,6 +1978,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">SED  Set Decimal Flag
+
+     1 -&gt; D                           N Z C I D V
+                                      - - - - 1 -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       SED           F8    1     2
+</code></pre>
 <hr />
 <h3 id="sei-set-interrupt-disable"><code>SEI</code> set interrupt disable</h3>
 <table>
@@ -1441,6 +2017,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">SEI  Set Interrupt Disable Status
+
+     1 -&gt; I                           N Z C I D V
+                                      - - - 1 - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       SEI           78    1     2
+</code></pre>
 <hr />
 <h3 id="sta-store-accumulator"><code>STA</code> store accumulator</h3>
 <table>
@@ -1471,6 +2056,21 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">STA  Store Accumulator in Memory
+
+     A -&gt; M                           N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     zeropage      STA oper      85    2     3
+     zeropage,X    STA oper,X    95    2     4
+     absolute      STA oper      8D    3     4
+     absolute,X    STA oper,X    9D    3     5
+     absolute,Y    STA oper,Y    99    3     5
+     (indirect,X)  STA (oper,X)  81    2     6
+     (indirect),Y  STA (oper),Y  91    2     6
+</code></pre>
 <hr />
 <h3 id="stx-store-x"><code>STX</code> store X</h3>
 <table>
@@ -1501,6 +2101,17 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">STX  Store Index X in Memory
+
+     X -&gt; M                           N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     zeropage      STX oper      86    2     3
+     zeropage,Y    STX oper,Y    96    2     4
+     absolute      STX oper      8E    3     4
+</code></pre>
 <hr />
 <h3 id="sty-store-y"><code>STY</code> store Y</h3>
 <table>
@@ -1531,6 +2142,17 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">STY  Sore Index Y in Memory
+
+     Y -&gt; M                           N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     zeropage      STY oper      84    2     3
+     zeropage,X    STY oper,X    94    2     4
+     absolute      STY oper      8C    3     4
+</code></pre>
 <hr />
 <h3 id="tax-transfer-accumulator-to-x"><code>TAX</code> transfer accumulator to X</h3>
 <table>
@@ -1561,6 +2183,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">TAX  Transfer Accumulator to Index X
+
+     A -&gt; X                           N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       TAX           AA    1     2
+</code></pre>
 <hr />
 <h3 id="tay-transfer-accumulator-to-y"><code>TAY</code> transfer accumulator to Y</h3>
 <table>
@@ -1591,6 +2222,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">TAY  Transfer Accumulator to Index Y
+
+     A -&gt; Y                           N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       TAY           A8    1     2
+</code></pre>
 <hr />
 <h3 id="tsx-transfer-stack-pointer-to-x"><code>TSX</code> transfer stack pointer to X</h3>
 <table>
@@ -1621,6 +2261,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">TSX  Transfer Stack Pointer to Index X
+
+     SP -&gt; X                          N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       TSX           BA    1     2
+</code></pre>
 <hr />
 <h3 id="txa-transfer-x-to-accumulator"><code>TXA</code> transfer X to accumulator</h3>
 <table>
@@ -1651,6 +2300,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">TXA  Transfer Index X to Accumulator
+
+     X -&gt; A                           N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       TXA           8A    1     2
+</code></pre>
 <hr />
 <h3 id="txs-transfer-x-to-stack-pointer"><code>TXS</code> transfer X to stack pointer</h3>
 <table>
@@ -1681,6 +2339,15 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">TXS  Transfer Index X to Stack Register
+
+     X -&gt; SP                          N Z C I D V
+                                      - - - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       TXS           9A    1     2
+</code></pre>
 <hr />
 <h3 id="tya-transfer-y-to-accumulator"><code>TYA</code> transfer Y to accumulator</h3>
 <table>
@@ -1711,7 +2378,28 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-none">TYA  Transfer Index Y to Accumulator
+
+     Y -&gt; A                           N Z C I D V
+                                      + + - - - -
+
+     addressing    assembler    opc  bytes  cyles
+     --------------------------------------------
+     implied       TYA           98    1     2
+</code></pre>
 <hr />
+<h2 id="note">Note</h2>
+<p>*  add 1 to cycles if page boundery is crossed</p>
+<p>** add 1 to cycles if branch occurs on same page
+   add 2 to cycles if branch occurs to different page</p>
+<h3 id="legend-to-flags">Legend to Flags:</h3>
+<pre><code class="language-none"> + .... modified
+ - .... not modified
+ 1 .... set
+ 0 .... cleared
+M6 .... memory bit 6
+M7 .... memory bit 7
+</code></pre>
               
             </div>
           </div>
