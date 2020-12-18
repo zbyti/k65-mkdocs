@@ -112,7 +112,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#inx-increment-x">INX increment X</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#iny-increment-x">INY increment X</a>
+    <li class="toctree-l3"><a class="reference internal" href="#iny-increment-y">INY increment Y</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#jmp-jump">JMP jump</a>
     </li>
@@ -235,6 +235,26 @@
                 <h1 id="_1"></h1>
 <p><strong>K65</strong> compiler supports following 6502 instructions. <strong>TBD</strong> value means that instruction support is planned, but currently not implemented.</p>
 <h2 id="standard-6502-opcodes">Standard 6502 opcodes</h2>
+<p><a href="#adc-add-with-carry"><code>ADC</code></a> <a href="#and-and-with-accumulator"><code>AND</code></a> <a href="#asl-arithmetic-shift-left"><code>ASL</code></a>
+<a href="#bcc-branch-on-carry-clear"><code>BCC</code></a> <a href="#bcs-branch-on-carry-clear"><code>BCS</code></a> <a href="#beq-branch-on-equal-zero-set"><code>BEQ</code></a>
+<a href="#bit-bit-test"><code>BIT</code></a> <a href="#bmi-branch-on-minus-negative-set"><code>BMI</code></a> <a href="#bne-branch-on-not-equal-zero-clear"><code>BNE</code></a>
+<a href="#bpl-branch-on-plus-negative-clear"><code>BPL</code></a> <a href="#brk-interrupt"><code>BRK</code></a> <a href="#bvc-branch-on-overflow-clear"><code>BVC</code></a>
+<a href="#bvs-branch-on-overflow-set"><code>BVS</code></a> <a href="#clc-clear-carry"><code>CLC</code></a> <a href="#cld-clear-decimal"><code>CLD</code></a>
+<a href="#cli-clear-interrupt-disable"><code>CLI</code></a> <a href="#clv-clear-overflow"><code>CLV</code></a> <a href="#cmp-compare-with-accumulator"><code>CMP</code></a>
+<a href="#cpx-compare-with-x"><code>CPX</code></a> <a href="#cpy-compare-with-y"><code>CPY</code></a> <a href="#dec-decrement"><code>DEC</code></a>
+<a href="#dex-decrement-x"><code>DEX</code></a> <a href="#dey-decrement-y"><code>DEY</code></a> <a href="#eor-exclusive-or-with-accumulator"><code>EOR</code></a>
+<a href="#inc-increment"><code>INC</code></a> <a href="#inx-increment-x"><code>INX</code></a> <a href="#iny-increment-y"><code>INY</code></a>
+<a href="#jmp-jump"><code>JMP</code></a> <a href="#jsr-jump-subroutine"><code>JSR</code></a> <a href="#lda-load-accumulator"><code>LDA</code></a>
+<a href="#ldx-load-x"><code>LDX</code></a> <a href="#ldy-load-y"><code>LDY</code></a> <a href="#lsr-logical-shift-right"><code>LSR</code></a>
+<a href="#nop-no-operation"><code>NOP</code></a> <a href="#ora-or-with-accumulator"><code>ORA</code></a> <a href="#pha-push-accumulator"><code>PHA</code></a>
+<a href="#php-push-processor-status-sr"><code>PHP</code></a> <a href="#pla-pull-accumulator"><code>PLA</code></a> <a href="#plp-pull-processor-status-sr"><code>PLP</code></a>
+<a href="#rol-rotate-left"><code>ROL</code></a> <a href="#ror-rotate-right"><code>ROR</code></a> <a href="#rti-return-from-interrupt"><code>RTI</code></a>
+<a href="#rts-return-from-subroutine"><code>RTS</code></a> <a href="#sbc-subtract-with-carry"><code>SBC</code></a> <a href="#sec-set-carry"><code>SEC</code></a>
+<a href="#sed-set-decimal"><code>SED</code></a> <a href="#sei-set-interrupt-disable"><code>SEI</code></a> <a href="#sta-store-accumulator"><code>STA</code></a>
+<a href="#stx-store-x"><code>STX</code></a> <a href="#sty-store-y"><code>STY</code></a> <a href="#tax-transfer-accumulator-to-x"><code>TAX</code></a>
+<a href="#tay-transfer-accumulator-to-y"><code>TAY</code></a> <a href="#tsx-transfer-stack-pointer-to-x"><code>TSX</code></a> <a href="#txa-transfer-x-to-accumulator"><code>TXA</code></a>
+<a href="#txs-transfer-x-to-stack-pointer"><code>TXS</code></a> <a href="#tya-transfer-y-to-accumulator"><code>TYA</code></a></p>
+<hr />
 <h3 id="adc-add-with-carry"><code>ADC</code> add with carry</h3>
 <table>
 <thead>
@@ -816,7 +836,7 @@
 </tbody>
 </table>
 <hr />
-<h3 id="iny-increment-x"><code>INY</code> increment X</h3>
+<h3 id="iny-increment-y"><code>INY</code> increment Y</h3>
 <table>
 <thead>
 <tr>
