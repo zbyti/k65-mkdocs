@@ -1273,7 +1273,7 @@ TYA  Transfer Index Y to Accumulator
 \*\* add 1 to cycles if branch occurs on same page
    add 2 to cycles if branch occurs to different page
 
-### Legend to Flags:
+### Legend to Flags
 
 ```none
  + .... modified
