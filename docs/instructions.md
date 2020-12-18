@@ -263,7 +263,7 @@ Acc|Implied|Imm|Mem|Mem,X|Mem,Y|(Mem,X)|(Mem),Y|(Mem)
 
 ### `NOP` no operation
 
-* `*` (for single NOP)
+* `*` for single NOP
 * `*<number>` to wait `<number>` of cycles
 
 

@@ -28,4 +28,4 @@ K65 is a compiler for [6502 CPU](https://en.wikipedia.org/wiki/MOS_Technology_65
 
 ---
 
-*This documentation wiki is currently being built.*
+*This documentation is currently being built.*

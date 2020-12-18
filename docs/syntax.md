@@ -17,11 +17,11 @@ Variables in **K65** are names given to chosen memory addresses.
 Examples of variable declaration:
 
 ```c
-var foo=0x80          // declares 'foo' at address 0x80
-var foo2              // declares 'foo2' at address 0x81 (next after previous var)
-var foo3, foo4        // multiple declarations per line allowed
-var bar[10], bar2[10] // [] specifies variable size in bytes (address increment for next var)
-var bar3 ?            // adding '?' at the end of var declaration makes compiler print var addresses
+var foo=0x80            // declares 'foo' at address 0x80
+var foo2                // declares 'foo2' at address 0x81 (next after previous var)
+var foo3, foo4          // multiple declarations per line allowed
+var bar[10], bar2[10]   // [] specifies variable size in bytes (address increment for next var)
+var bar3 ?              // adding '?' at the end of var declaration makes compiler print var addresses
 ```
 
 ## Constant declaration

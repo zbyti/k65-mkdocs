@@ -43,5 +43,5 @@ Here is my current list of things still to be done in **K65** compiler.
 * option to override `ORG` and `RORG` execution address
 * *lazy* code sections
 * target files and names `.bin` `.lst` `.sym` in config file
-* make `LST` files compatible with **DASM/Stella`**
+* make `LST` files compatible with **DASM/Stella**
 * language reference document
