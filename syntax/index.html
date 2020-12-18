@@ -173,7 +173,7 @@ var bar3 ?              // adding '?' at the end of var declaration makes compil
 <pre><code class="language-c">bank my_bank            // from now on all code and data will go to 'my_bank'
 </code></pre>
 <h2 id="data-block-definition">Data block definition</h2>
-<p>Data blocks are defined using data keyword. Defining data block at the same time defines a label to its first element, so the block is accessibl using simple indexing, like <code>MyData,x</code>. Datablocks can have optional <code>alignment</code> or <code>no-page-crossing</code> restrictions enabled.</p>
+<p>Data blocks are defined using data keyword. Defining data block at the same time defines a label to its first element, so the block is accessibl using simple indexing, like <code>MyData,x</code>. Datablocks can have optional <strong>alignment</strong> or <strong>no-page-crossing</strong> restrictions enabled.</p>
 <p>Examples:</p>
 <pre><code class="language-c">data MyData {
   align 16              // align to 16 byte boundary
@@ -216,7 +216,7 @@ data MyData3 {
 }            // no RTS here; make sure function never reaches here
 </code></pre>
 <h3 id="inline"><code>inline</code></h3>
-<p>User defined <code>macro</code> that is <em>inlined</em> in the code when used.</p>
+<p>User defined <code>macro</code> that is inlined in the code when used.</p>
 <pre><code class="language-c">inline inc_y {
   y++
 }

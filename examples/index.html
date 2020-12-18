@@ -66,6 +66,12 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Examples</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#scripts">Scripts</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#project-example-files">Project example files</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#atari-800-xl">Atari 800 XL</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#rainbow">Rainbow</a>
@@ -135,6 +141,31 @@
             <div class="section">
               
                 <h1 id="_1"></h1>
+<h2 id="scripts">Scripts</h2>
+<h3 id="project-example-files">Project example files</h3>
+<p><code>main.k65proj</code></p>
+<pre><code class="language-none">-system AtariXL
+-lowAddr 0x2000
+
+../../include/defs.k65  main
+main.k65                main
+
+-o main.xex
+
+-link
+!atari800 main.xex
+</code></pre>
+<p><code>make</code></p>
+<pre><code class="language-none">K65=${K65_HOME}/bin/k65
+
+all: main clean
+
+main:
+  $(K65) @main.k65proj
+
+clean:
+  rm main.gmap main.lst main.sym
+</code></pre>
 <h2 id="atari-800-xl">Atari 800 XL</h2>
 <h3 id="rainbow">Rainbow</h3>
 <pre><code class="language-c">main {
