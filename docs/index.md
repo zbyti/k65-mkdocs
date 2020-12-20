@@ -4,6 +4,15 @@ K65 is a compiler for [6502 CPU](https://en.wikipedia.org/wiki/MOS_Technology_65
 
 ---
 
+## Language Support
+
+### Visual Studio Code
+
+* Syntax Highlighting [Extension](https://marketplace.visualstudio.com/items?itemName=vscode-k65.vscode-k65)
+
+
+---
+
 ## Dowloads
 
 ### Current release
