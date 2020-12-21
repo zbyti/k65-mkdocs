@@ -215,7 +215,7 @@ BCS  Branch on Carry Set
 
 ### `BEQ` branch on equal (zero set)
 
-* `{ ... }`
+* `!={ ... }`
 * `== goto label`
 * `{ ... } ==`
 
