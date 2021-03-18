@@ -1156,7 +1156,7 @@ STY  Sore Index Y in Memory
 
 Acc|Implied|Imm|Mem|Mem,X|Mem,Y|(Mem,X)|(Mem),Y|(Mem)
 :---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:
-|`x-a`|||||||
+|`x=a`|||||||
 
 ```none
 TAX  Transfer Accumulator to Index X
