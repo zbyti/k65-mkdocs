@@ -820,7 +820,7 @@ NOP  No Operation
 
 Acc|Implied|Imm|Mem|Mem,X|Mem,Y|(Mem,X)|(Mem),Y|(Mem)
 :---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:
-||`imm`|`mem`|`mem,x`|`mem,y`|`(mem,x)`|`(mem),y`|
+||`a|imm`|`a|mem`|`a|mem,x`|`a|mem,y`|`a|(mem,x)`|`a|(mem),y`|
 
 ```none
 ORA  OR Memory with Accumulator
