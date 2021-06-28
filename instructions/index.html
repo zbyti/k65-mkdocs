@@ -468,9 +468,9 @@ C ....  Carry
 <li><code>&gt;={ ... }</code></li>
 <li><code>&lt; goto label</code></li>
 <li><code>{ ... } &lt;</code></li>
-<li><code>c+{ ... }</code></li>
-<li><code>c- goto label</code></li>
-<li><code>{ ... } c-</code></li>
+<li><code>c+?{ ... }</code></li>
+<li><code>c-? goto label</code></li>
+<li><code>{ ... } c-?</code></li>
 </ul>
 <pre><code class="language-none">BCC  Branch on Carry Clear
 
@@ -487,9 +487,9 @@ C ....  Carry
 <li><code>&lt;{ ... }</code></li>
 <li><code>&gt;= goto label</code></li>
 <li><code>{ ... } &gt;=</code></li>
-<li><code>c-{ ... }</code></li>
-<li><code>c+ goto label</code></li>
-<li><code>{ ... } c+</code></li>
+<li><code>c-?{ ... }</code></li>
+<li><code>c+? goto label</code></li>
+<li><code>{ ... } c+?</code></li>
 </ul>
 <pre><code class="language-none">BCS  Branch on Carry Set
 
