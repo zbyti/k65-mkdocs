@@ -174,9 +174,9 @@ ASL  Shift Left One Bit (Memory or Accumulator)
 * `>={ ... }`
 * `< goto label`
 * `{ ... } <`
-* `c+{ ... }`
-* `c- goto label`
-* `{ ... } c-`
+* `c+?{ ... }`
+* `c-? goto label`
+* `{ ... } c-?`
 
 ```none
 BCC  Branch on Carry Clear
@@ -196,9 +196,9 @@ BCC  Branch on Carry Clear
 * `<{ ... }`
 * `>= goto label`
 * `{ ... } >=`
-* `c-{ ... }`
-* `c+ goto label`
-* `{ ... } c+`
+* `c-?{ ... }`
+* `c+? goto label`
+* `{ ... } c+?`
 
 ```none
 BCS  Branch on Carry Set
