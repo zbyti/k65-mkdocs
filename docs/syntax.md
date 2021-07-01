@@ -68,6 +68,32 @@ data MyData3 {
   nocross               // the data will fit completely inside single page, but can be at any offset within it
   1 2 3 4 5 6 7 8       // data bytes folow
 }
+
+data MyData {
+  address 0x5000        // fixed memory address
+  1 2 3 4 5 6 7 8       // data bytes folow
+}
+
+data sprite {
+  align 256
+  // image <file> <x0> <y0> <byte> <repeat> - gather bits from image
+  //  <file>    - file name without ".bmp" extension
+  //  <x0> <y0> - first pixel to scan
+  //  <byte>    - scanning mode for each single byte starting with MSB (count+direction)
+  //  <repeat>  - scanning mode for consecutive bytes (count+direction)
+
+  image sprites  0 0 8> 16v   // start at pixel (0,0), each byte is 8 bits to the right, repeat 16 times going up
+  image sprites 10 0 8> 16v   // do the same from (10,0)
+  image sprites 20 0 8> 16v   // and again starting at (20,0)
+}
+
+data fonts {
+    address 0x5000
+    image "data/font" 0 0  8> 8v tiles 8 0 31
+    image "data/font" 0 8  8> 8v tiles 8 0 31
+    image "data/font" 0 16 8> 8v tiles 8 0 31
+    image "data/font" 0 24 8> 8v tiles 8 0 31
+}
 ```
 
 ## Compile-time Evaluator
