@@ -94,6 +94,18 @@ data fonts {
     image "data/font" 0 16 8> 8v tiles 8 0 31
     image "data/font" 0 24 8> 8v tiles 8 0 31
 }
+
+data SineX {
+  align 256
+  0
+  for x=0..213 eval [ (sin(x/212*pi*2)*.499+.499)*130 ]
+}
+
+data SineY {
+  align 256
+  0
+  for x=0..255 eval [ (sin(x/256*pi*2)*.499+.499)*180+1 ]
+}
 ```
 
 ## Compile-time Evaluator
