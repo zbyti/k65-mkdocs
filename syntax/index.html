@@ -215,6 +215,18 @@ data fonts {
     image &quot;data/font&quot; 0 16 8&gt; 8v tiles 8 0 31
     image &quot;data/font&quot; 0 24 8&gt; 8v tiles 8 0 31
 }
+
+data SineX {
+  align 256
+  0
+  for x=0..213 eval [ (sin(x/212*pi*2)*.499+.499)*130 ]
+}
+
+data SineY {
+  align 256
+  0
+  for x=0..255 eval [ (sin(x/256*pi*2)*.499+.499)*180+1 ]
+}
 </code></pre>
 <h2 id="compile-time-evaluator">Compile-time Evaluator</h2>
 <p>The <strong>K65</strong> compiler has embedded evaluator that always executes at compile-time. The evaluator can perform arbitrary math operations which results are inlined in the final code as immediates. The evaluator can also set and use global compiler constants.</p>
