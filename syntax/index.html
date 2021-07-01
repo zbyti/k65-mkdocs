@@ -189,6 +189,32 @@ data MyData3 {
   nocross               // the data will fit completely inside single page, but can be at any offset within it
   1 2 3 4 5 6 7 8       // data bytes folow
 }
+
+data MyData {
+  address 0x5000        // fixed memory address
+  1 2 3 4 5 6 7 8       // data bytes folow
+}
+
+data sprite {
+  align 256
+  // image &lt;file&gt; &lt;x0&gt; &lt;y0&gt; &lt;byte&gt; &lt;repeat&gt; - gather bits from image
+  //  &lt;file&gt;    - file name without &quot;.bmp&quot; extension
+  //  &lt;x0&gt; &lt;y0&gt; - first pixel to scan
+  //  &lt;byte&gt;    - scanning mode for each single byte starting with MSB (count+direction)
+  //  &lt;repeat&gt;  - scanning mode for consecutive bytes (count+direction)
+
+  image sprites  0 0 8&gt; 16v   // start at pixel (0,0), each byte is 8 bits to the right, repeat 16 times going up
+  image sprites 10 0 8&gt; 16v   // do the same from (10,0)
+  image sprites 20 0 8&gt; 16v   // and again starting at (20,0)
+}
+
+data fonts {
+    address 0x5000
+    image &quot;data/font&quot; 0 0  8&gt; 8v tiles 8 0 31
+    image &quot;data/font&quot; 0 8  8&gt; 8v tiles 8 0 31
+    image &quot;data/font&quot; 0 16 8&gt; 8v tiles 8 0 31
+    image &quot;data/font&quot; 0 24 8&gt; 8v tiles 8 0 31
+}
 </code></pre>
 <h2 id="compile-time-evaluator">Compile-time Evaluator</h2>
 <p>The <strong>K65</strong> compiler has embedded evaluator that always executes at compile-time. The evaluator can perform arbitrary math operations which results are inlined in the final code as immediates. The evaluator can also set and use global compiler constants.</p>
