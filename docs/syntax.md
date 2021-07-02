@@ -95,6 +95,11 @@ data fonts {
     image "data/font" 0 24 8> 8v tiles 8 0 31
 }
 
+data table {
+  address 0x2000
+  binary "table.bin"
+}
+
 data SineX {
   align 256
   0
