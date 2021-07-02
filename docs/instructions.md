@@ -218,6 +218,9 @@ BCS  Branch on Carry Set
 * `!={ ... }`
 * `== goto label`
 * `{ ... } ==`
+* `z-?{ ... }`
+* `z+? goto label`
+* `{ ... } z+?`
 
 ```none
 BEQ  Branch on Result Zero
@@ -260,6 +263,9 @@ BIT  Test Bits in Memory with Accumulator
 * `>=0{ ... }`
 * `<0 goto label`
 * `{ ... } <0`
+* `n-?{ ... }`
+* `n+? goto label`
+* `{ ... } n+?`
 
 ```none
 BMI  Branch on Result Minus
@@ -279,6 +285,9 @@ BMI  Branch on Result Minus
 * `=={ ... }`
 * `!= goto label`
 * `{ ... } !=`
+* `z+?{ ... }`
+* `z-? goto label`
+* `{ ... } z-?`
 
 ```
 BNE  Branch on Result not Zero
@@ -298,6 +307,9 @@ BNE  Branch on Result not Zero
 * `<0{ ... }`
 * `>=0 goto label`
 * `{ ... } >=0`
+* `n+?{ ... }`
+* `n-? goto label`
+* `{ ... } n-?`
 
 ```none
 BPL  Branch on Result Plus
@@ -334,6 +346,9 @@ BRK  Force Break
 * `<<={ ... }`
 * `>>= goto label`
 * `{ ... } >>=`
+* `v+{ ... }`
+* `v- goto label`
+* `{ ... } v-`
 
 ```none
 BVC  Branch on Overflow Clear
@@ -353,6 +368,9 @@ BVC  Branch on Overflow Clear
 * `>>={ ... }`
 * `<<= goto label`
 * `{ ... } <<=`
+* `v-{ ... }`
+* `v+ goto label`
+* `{ ... } v+`
 
 ```none
 BVS  Branch on Overflow Set
