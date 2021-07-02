@@ -54,7 +54,7 @@ Data blocks are defined using data keyword. Defining data block at the same time
 Examples:
 
 ```c
-data MyData {
+data MyData1 {
   align 16              // align to 16 byte boundary
   1 2 3 4 5 6 7 8       // data bytes folow
 }
@@ -69,9 +69,13 @@ data MyData3 {
   1 2 3 4 5 6 7 8       // data bytes folow
 }
 
-data MyData {
+data MyData4 {
   address 0x5000        // fixed memory address
   1 2 3 4 5 6 7 8       // data bytes folow
+}
+
+data MyData5 {
+  0 0 code { a=x }
 }
 
 data sprite {
