@@ -506,6 +506,9 @@ C ....  Carry
 <li><code>!={ ... }</code></li>
 <li><code>== goto label</code></li>
 <li><code>{ ... } ==</code></li>
+<li><code>z-?{ ... }</code></li>
+<li><code>z+? goto label</code></li>
+<li><code>{ ... } z+?</code></li>
 </ul>
 <pre><code class="language-none">BEQ  Branch on Result Zero
 
@@ -565,6 +568,9 @@ C ....  Carry
 <li><code>&gt;=0{ ... }</code></li>
 <li><code>&lt;0 goto label</code></li>
 <li><code>{ ... } &lt;0</code></li>
+<li><code>n-?{ ... }</code></li>
+<li><code>n+? goto label</code></li>
+<li><code>{ ... } n+?</code></li>
 </ul>
 <pre><code class="language-none">BMI  Branch on Result Minus
 
@@ -581,6 +587,9 @@ C ....  Carry
 <li><code>=={ ... }</code></li>
 <li><code>!= goto label</code></li>
 <li><code>{ ... } !=</code></li>
+<li><code>z+?{ ... }</code></li>
+<li><code>z-? goto label</code></li>
+<li><code>{ ... } z-?</code></li>
 </ul>
 <pre><code>BNE  Branch on Result not Zero
 
@@ -597,6 +606,9 @@ C ....  Carry
 <li><code>&lt;0{ ... }</code></li>
 <li><code>&gt;=0 goto label</code></li>
 <li><code>{ ... } &gt;=0</code></li>
+<li><code>n+?{ ... }</code></li>
+<li><code>n-? goto label</code></li>
+<li><code>{ ... } n-?</code></li>
 </ul>
 <pre><code class="language-none">BPL  Branch on Result Plus
 
@@ -625,6 +637,9 @@ C ....  Carry
 <li><code>&lt;&lt;={ ... }</code></li>
 <li><code>&gt;&gt;= goto label</code></li>
 <li><code>{ ... } &gt;&gt;=</code></li>
+<li><code>v+{ ... }</code></li>
+<li><code>v- goto label</code></li>
+<li><code>{ ... } v-</code></li>
 </ul>
 <pre><code class="language-none">BVC  Branch on Overflow Clear
 
@@ -641,6 +656,9 @@ C ....  Carry
 <li><code>&gt;&gt;={ ... }</code></li>
 <li><code>&lt;&lt;= goto label</code></li>
 <li><code>{ ... } &lt;&lt;=</code></li>
+<li><code>v-{ ... }</code></li>
+<li><code>v+ goto label</code></li>
+<li><code>{ ... } v+</code></li>
 </ul>
 <pre><code class="language-none">BVS  Branch on Overflow Set
 
