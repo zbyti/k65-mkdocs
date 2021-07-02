@@ -111,6 +111,15 @@ data SineY {
   0
   for x=0..255 eval [ (sin(x/256*pi*2)*.499+.499)*180+1 ]
 }
+
+data InfoScript {
+  charset " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!'-?:/()acelnosxz&"
+
+  "POlaCZONY Z WYWIADEM" 0xFE
+  "Z TYM WIELKIM" 0xFE
+  "ARTYSTa." 0xFE 0xF0
+  0xFE
+}
 ```
 
 ## Compile-time Evaluator
