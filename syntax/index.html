@@ -232,6 +232,15 @@ data SineY {
   0
   for x=0..255 eval [ (sin(x/256*pi*2)*.499+.499)*180+1 ]
 }
+
+data InfoScript {
+  charset &quot; ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!'-?:/()acelnosxz&amp;&quot;
+
+  &quot;POlaCZONY Z WYWIADEM&quot; 0xFE
+  &quot;Z TYM WIELKIM&quot; 0xFE
+  &quot;ARTYSTa.&quot; 0xFE 0xF0
+  0xFE
+}
 </code></pre>
 <h2 id="compile-time-evaluator">Compile-time Evaluator</h2>
 <p>The <strong>K65</strong> compiler has embedded evaluator that always executes at compile-time. The evaluator can perform arbitrary math operations which results are inlined in the final code as immediates. The evaluator can also set and use global compiler constants.</p>
