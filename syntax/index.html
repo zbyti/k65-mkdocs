@@ -175,7 +175,7 @@ var bar3 ?              // adding '?' at the end of var declaration makes compil
 <h2 id="data-block-definition">Data block definition</h2>
 <p>Data blocks are defined using data keyword. Defining data block at the same time defines a label to its first element, so the block is accessibl using simple indexing, like <code>MyData,x</code>. Datablocks can have optional <strong>alignment</strong> or <strong>no-page-crossing</strong> restrictions enabled.</p>
 <p>Examples:</p>
-<pre><code class="language-c">data MyData {
+<pre><code class="language-c">data MyData1 {
   align 16              // align to 16 byte boundary
   1 2 3 4 5 6 7 8       // data bytes folow
 }
@@ -190,9 +190,13 @@ data MyData3 {
   1 2 3 4 5 6 7 8       // data bytes folow
 }
 
-data MyData {
+data MyData4 {
   address 0x5000        // fixed memory address
   1 2 3 4 5 6 7 8       // data bytes folow
+}
+
+data MyData5 {
+  0 0 code { a=x }
 }
 
 data sprite {
