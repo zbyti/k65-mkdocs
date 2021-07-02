@@ -334,9 +334,6 @@ BRK  Force Break
 * `<<={ ... }`
 * `>>= goto label`
 * `{ ... } >>=`
-* `o+{ ... }`
-* `o- goto label`
-* `{ ... } o-`
 
 ```none
 BVC  Branch on Overflow Clear
@@ -356,9 +353,6 @@ BVC  Branch on Overflow Clear
 * `>>={ ... }`
 * `<<= goto label`
 * `{ ... } <<=`
-* `o-{ ... }`
-* `o+ goto label`
-* `{ ... } o+`
 
 ```none
 BVS  Branch on Overflow Set
