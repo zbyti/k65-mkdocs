@@ -471,7 +471,7 @@ Acc|Implied|Imm|Mem|Mem,X|Mem,Y|(Mem,X)|(Mem),Y|(Mem)
 CMP  Compare Memory with Accumulator
 
      A - M                            N Z C I D V
-                                    + + + - - -
+                                      + + + - - -
 
      addressing    assembler    opc  bytes  cyles
      --------------------------------------------
