@@ -37,6 +37,53 @@ Examples:
 ]                       // end of evaluator expression
 ```
 
+## Labels
+
+A label can be placed at the beginning of a statement. During assembly, the label is assigned the current value of the active location counter and serves as an instruction operand. There are two types of lables: global and local. Examples below.
+
+### Global
+
+```c
+var SCREEN=0x400
+
+main {
+  x=0 {
+    a=hello,x z-?{ SCREEN,x=a x++ }
+  } z-?
+
+  return
+}
+
+data text_data {
+  charset ".ABCDEFGHIJKLMNOPQRSTUVWXYZ..... "
+
+  hello: "HELLO WORLD" 0
+}
+```
+
+### Local
+
+```c
+func draw_level {
+  .LV_TO_DRAW+1=a=p_current_lv .LV_TO_DRAW+2=a=p_current_lv+1
+
+  .LT+1=.LD+1=a=&<screen_1+224 .RT+1=.RD+1=a=&<screen_1+225
+  .LT+2=.RT+2=a=&>screen_1+0x100 .LD+2=.RD+2=a=&>screen_2+0x100
+
+  y=[LV_SIZE] {
+    .LV_TO_DRAW: a=levels,y
+
+    x=a .LT: screen_1=x x++ .RT: screen_1+1=x
+    a|0x20
+    x=a .LD: screen_2=x x++ .RD: screen_2+1=x
+
+    c+ a=.LT+1 a-2 .LT+1=.LD+1=a c-?{ .LT+2-- .RT+2-- .LD+2-- .RD+2-- } x=a x++ .RT+1=.RD+1=x
+
+    y--
+  } !=
+}
+```
+
 ## Bank selection
 
 While default bank can be chosen in file list for each file, a file can span across multiple banks. Active bank can be changed at any point in the file.
@@ -45,6 +92,30 @@ Example:
 
 ```c
 bank my_bank            // from now on all code and data will go to 'my_bank'
+```
+
+## Raw data
+
+You can use raw data to put (for example) unsupported opcodes or allocate certain memory for variables etc.
+
+Example:
+
+```c
+var bcol=0xd020
+
+main {
+  data { 0xEA 0xEA 0xEA }
+  { bcol++ } always
+}
+
+// produce this code:
+//
+//.C:0810  4C 13 08    JMP $0813
+//.C:0813  EA          NOP
+//.C:0814  EA          NOP
+//.C:0815  EA          NOP
+//.C:0816  EE 20 D0    INC $D020
+//.C:0819  4C 16 08    JMP $0816
 ```
 
 ## Data block definition
@@ -184,6 +255,24 @@ Functions and inlines are used simply by specifying their names, which places `J
 func test {
   inc_x      // this will use JSR instruction to call 'inc_x' defined earlier
   inc_y      // this will inline the 'inc_y' inline - note that it will not add any overhead compared to simple 'y++'
+}
+```
+
+## `else`
+
+In fact this creates (in branch code) jump to .label outside `else` bracket.
+
+Example:
+
+```c
+inline check_if_key_or_doors {
+  a?60 == {gamestate_keys++}
+  else {
+    a?62 == {
+        ptr_doors=a=x
+        temp1=a=1
+    }
+  }
 }
 ```
 
