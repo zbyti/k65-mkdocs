@@ -60,7 +60,17 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#constant-declaration">Constant declaration</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#labels">Labels</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#global">Global</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#local">Local</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#bank-selection">Bank selection</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#raw-data">Raw data</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#data-block-definition">Data block definition</a>
     </li>
@@ -77,6 +87,8 @@
     <li class="toctree-l3"><a class="reference internal" href="#inline">inline</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#else">else</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#far-calls">Far calls</a>
     </li>
@@ -167,10 +179,68 @@ var bar3 ?              // adding '?' at the end of var declaration makes compil
   SOME_NUMBER = 0x13
 ]                       // end of evaluator expression
 </code></pre>
+<h2 id="labels">Labels</h2>
+<p>A label can be placed at the beginning of a statement. During assembly, the label is assigned the current value of the active location counter and serves as an instruction operand. There are two types of lables: global and local. Examples below.</p>
+<h3 id="global">Global</h3>
+<pre><code class="language-c">var SCREEN=0x400
+
+main {
+  x=0 {
+    a=hello,x z-?{ SCREEN,x=a x++ }
+  } z-?
+
+  return
+}
+
+data text_data {
+  charset &quot;.ABCDEFGHIJKLMNOPQRSTUVWXYZ..... &quot;
+
+  hello: &quot;HELLO WORLD&quot; 0
+}
+</code></pre>
+<h3 id="local">Local</h3>
+<pre><code class="language-c">func draw_level {
+  .LV_TO_DRAW+1=a=p_current_lv .LV_TO_DRAW+2=a=p_current_lv+1
+
+  .LT+1=.LD+1=a=&amp;&lt;screen_1+224 .RT+1=.RD+1=a=&amp;&lt;screen_1+225
+  .LT+2=.RT+2=a=&amp;&gt;screen_1+0x100 .LD+2=.RD+2=a=&amp;&gt;screen_2+0x100
+
+  y=[LV_SIZE] {
+    .LV_TO_DRAW: a=levels,y
+
+    x=a .LT: screen_1=x x++ .RT: screen_1+1=x
+    a|0x20
+    x=a .LD: screen_2=x x++ .RD: screen_2+1=x
+
+    c+ a=.LT+1 a-2 .LT+1=.LD+1=a c-?{ .LT+2-- .RT+2-- .LD+2-- .RD+2-- } x=a x++ .RT+1=.RD+1=x
+
+    y--
+  } !=
+}
+</code></pre>
 <h2 id="bank-selection">Bank selection</h2>
 <p>While default bank can be chosen in file list for each file, a file can span across multiple banks. Active bank can be changed at any point in the file.</p>
 <p>Example:</p>
 <pre><code class="language-c">bank my_bank            // from now on all code and data will go to 'my_bank'
+</code></pre>
+<h2 id="raw-data">Raw data</h2>
+<p>You can use raw data to put (for example) unsupported opcodes or allocate certain memory for variables etc.</p>
+<p>Example:</p>
+<pre><code class="language-c">var bcol=0xd020
+
+main {
+  data { 0xEA 0xEA 0xEA }
+  { bcol++ } always
+}
+
+// produce this code:
+//
+//.C:0810  4C 13 08    JMP $0813
+//.C:0813  EA          NOP
+//.C:0814  EA          NOP
+//.C:0815  EA          NOP
+//.C:0816  EE 20 D0    INC $D020
+//.C:0819  4C 16 08    JMP $0816
 </code></pre>
 <h2 id="data-block-definition">Data block definition</h2>
 <p>Data blocks are defined using data keyword. Defining data block at the same time defines a label to its first element, so the block is accessibl using simple indexing, like <code>MyData,x</code>. Datablocks can have optional <strong>alignment</strong> or <strong>no-page-crossing</strong> restrictions enabled.</p>
@@ -281,6 +351,19 @@ data InfoScript {
 <pre><code class="language-c">func test {
   inc_x      // this will use JSR instruction to call 'inc_x' defined earlier
   inc_y      // this will inline the 'inc_y' inline - note that it will not add any overhead compared to simple 'y++'
+}
+</code></pre>
+<h2 id="else"><code>else</code></h2>
+<p>In fact this creates (in branch code) jump to .label outside <code>else</code> bracket.</p>
+<p>Example:</p>
+<pre><code class="language-c">inline check_if_key_or_doors {
+  a?60 == {gamestate_keys++}
+  else {
+    a?62 == {
+        ptr_doors=a=x
+        temp1=a=1
+    }
+  }
 }
 </code></pre>
 <h2 id="far-calls">Far calls</h2>
