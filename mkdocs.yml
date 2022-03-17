@@ -16,3 +16,6 @@ nav:
     - Projects: projects.md
     - Known Bugs: known-bugs.md
     - To Do: todo.md
+
+extra_css:
+    - css/extra.css
