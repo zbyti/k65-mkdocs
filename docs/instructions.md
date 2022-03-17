@@ -813,7 +813,9 @@ LSR  Shift One Bit Right (Memory or Accumulator)
 ### `NOP` no operation
 
 * `*` for single NOP
-* `*<number>` to wait `<number>` of cycles
+* `*<number>` to wait `<number>` of cycles. 
+
+Even values generate the number of NOP instructions equal to `number / 2`. Odd values generate `(number - 1) / 2` `+` **one illegal instruction** `NOP #0` 3 cycles long. 
 
 ```none
 NOP  No Operation
